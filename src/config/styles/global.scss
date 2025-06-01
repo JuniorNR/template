@@ -1,0 +1,11 @@
+@use 'scss-reset/reset';
+// START Закинуть эти строчки в next.config.ts
+@use './variables/colors' as colors;
+@use './variables/sizes' as sizes;
+// END
+
+body {
+  color: colors.$textColorDark;
+  background-color: colors.$backgroundColorGray;
+  font-family: --font-noto-sans;
+}

@@ -1,0 +1,17 @@
+@use 'sass:math';
+
+@function rem($pixel) {
+  @if (math.is-unitless($pixel)) {
+    @return math.div($pixel, 16) + rem;
+  } @else {
+    @error 'The any unit must be omitted.';
+  }
+}
+
+$text26: rem(26);
+$text24: rem(24);
+$text22: rem(22);
+$text20: rem(20);
+$text18: rem(18);
+$text14: rem(14);
+$text12: rem(12);
