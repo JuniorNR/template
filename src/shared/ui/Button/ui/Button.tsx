@@ -10,6 +10,7 @@ import type { ButtonProps } from '../model/types/Button.types';
 export const Button: FC<ButtonProps> = ({ children, ...props }) => {
   return (
     <MuiButton
+      data-testid='button'
       className={classNames(styles.button)}
       {...props}
     >

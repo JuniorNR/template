@@ -3,10 +3,7 @@
 import type { FC } from 'react';
 import { Typography } from '@mui/material';
 
-import { classNames } from '@/helpers';
 import { Button } from '@/ui';
-
-import styles from './page.module.scss';
 
 const Home: FC = () => {
   return (
