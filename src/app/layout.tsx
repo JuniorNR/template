@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Noto_Sans as notoSansFont } from 'next/font/google';
 
 import '@/config/styles/index.scss';
+
 import theme from '@/config/styles/theme/theme';
 
 import type { Metadata } from 'next';
