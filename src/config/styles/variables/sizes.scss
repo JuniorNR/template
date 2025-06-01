@@ -1,7 +1,7 @@
 @use 'sass:math';
 
 @function rem($pixel) {
-  @if (math.is-unitless($pixel)) {
+  @if math.is-unitless($pixel) {
     @return math.div($pixel, 16) + rem;
   } @else {
     @error 'The any unit must be omitted.';

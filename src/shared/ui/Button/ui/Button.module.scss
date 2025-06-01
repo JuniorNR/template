@@ -1,7 +1,9 @@
 .button {
   padding: sizes.rem(10);
-  font-size: sizes.$text14;
-  background-color: colors.$backgroundColorAccent;
+
   border-radius: 5px;
+  background-color: colors.$backgroundColorAccent;
+
   font-family: none;
+  font-size: sizes.$text14;
 }
