@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       @use "./variables/colors" as colors;
     `,
   },
-  experimental: { workerThreads: true, cpus: 4 },
+  // experimental: { workerThreads: true, cpus: 4 },
 };
 
 export default nextConfig;
