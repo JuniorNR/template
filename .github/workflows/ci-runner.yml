@@ -1,10 +1,11 @@
-#!/bin/sh
-
 name: CI/CD pipeline for Next.js
 on: [push, pull_request]
 jobs:
-  lint:
-    runs-on: [ubuntu-latest, windows-latest, macos-latest]
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
