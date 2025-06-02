@@ -1,0 +1,32 @@
+#!/bin/sh
+
+name: CI/CD pipeline for Next.js
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+      - name: Cache Primes
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}
+      - name: install dependencies
+        run: pnpm ci --prefer-offline
+      - name: build project
+        run: pnpm build
+      - name: linting typescript
+        run: pnpm lint:ts
+      - name: linting scss
+        run: pnpm lint:scss
+      - name: unit testing
+        run: pnpm unit
