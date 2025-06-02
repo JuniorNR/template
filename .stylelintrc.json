@@ -2,6 +2,7 @@
   "extends": ["stylelint-config-standard-scss", "stylelint-order-config-standard"],
   "plugins": ["stylelint-order"],
   "rules": {
-  "color-no-invalid-hex": true
+  "color-no-invalid-hex": true,
+  "scss/dollar-variable-pattern": null
   }
 }

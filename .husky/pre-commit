@@ -1,3 +1,5 @@
+. "$(dirname "$0")/_/husky.sh"
+
 pnpm lint:ts --fix
 pnpm lint:scss
 pnpm unit
