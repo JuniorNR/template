@@ -1,8 +1,17 @@
 {
   "extends": ["stylelint-config-standard-scss", "stylelint-order-config-standard"],
-  "plugins": ["stylelint-order"],
+  "plugins": ["stylelint-order", "@stylistic/stylelint-plugin"],
   "rules": {
-  "color-no-invalid-hex": true,
-  "scss/dollar-variable-pattern": null
+    "comment-no-empty": null,
+    "no-invalid-double-slash-comments": null,
+    "color-no-invalid-hex": true,
+    "function-linear-gradient-no-nonstandard-direction": true,
+    "declaration-no-important": true,
+    "scss/dollar-variable-pattern": null,
+    "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
+    "scss/at-else-closing-brace-space-after": "always-intermediate",
+    "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
+    "scss/at-if-closing-brace-space-after": "always-intermediate",
+    "@stylistic/indentation": 2
   }
 }

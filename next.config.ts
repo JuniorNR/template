@@ -11,6 +11,21 @@ const nextConfig: NextConfig = {
       @use "./variables/colors" as colors;
     `,
   },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              icon: true,
+            },
+          },
+        ],
+        as: '*.ts',
+      },
+    },
+  },
   // experimental: { workerThreads: true, cpus: 4 },
 };
 

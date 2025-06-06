@@ -15,6 +15,8 @@ const config: Config = {
     '@/styles': '<rootDir>/src/config/styles',
     '@/helpers': '<rootDir>/src/shared/lib/helpers',
     '@/ui': '<rootDir>/src/shared/ui',
+    '@/assets/icons/(.*)': '<rootDir>/src/shared/assets/icons/$1',
+    '@/features': '<rootDir>/src/features',
   },
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,

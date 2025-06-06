@@ -11,6 +11,8 @@ describe('classNames function', () => {
     expect(classNames('', {}, ['test', 'test2'])).toBe('test test2');
   });
   test('all arguments', () => {
-    expect(classNames('test', { test2: true }, ['test3'])).toBe('test test2 test3');
+    expect(classNames('test', { test2: true }, ['test3'])).toBe(
+      'test test2 test3',
+    );
   });
 });

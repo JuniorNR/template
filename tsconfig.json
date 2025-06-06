@@ -25,10 +25,13 @@
       }
     ],
     "paths": {
+      // jest.config.ts
       "@/*": ["./src/*"],
       "@/styles": ["./src/config/styles/index"],
       "@/helpers": ["./src/shared/lib/helpers/index"],
       "@/ui": ["./src/shared/ui/index"],
+      "@/assets/icons/*": ["./src/shared/assets/icons/*"],
+      "@/features": ["./src/features/index"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

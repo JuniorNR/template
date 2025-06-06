@@ -1,0 +1,44 @@
+$starHeight: 25px;
+$starWidth: 25px;
+$totalWidth: $starWidth * 5;
+
+.rating {
+  display: flex;
+
+  width: $totalWidth;
+  height: $starHeight;
+}
+
+.star {
+  flex-shrink: 0;
+
+  width: $starWidth;
+  height: $starHeight;
+  
+  cursor: pointer;
+
+  fill: colors.$backgroundColorLight;
+
+  &.filled {
+    fill: colors.$backgroundColorAccent;
+  }
+
+  & > svg {
+    width: $starWidth;
+    height: $starHeight;
+
+    transition-duration: .3s;
+
+    &:hover {
+      & > svg {
+        transform: scale(1.25);
+      }
+    }
+
+    & > path {
+      width: 25px;
+      height: 25px;
+
+      box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+    }}
+}
