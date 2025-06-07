@@ -1,10 +1,10 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Noto_Sans as notoSansFont } from 'next/font/google';
-
 import '@/config/styles/index.scss';
 
 import theme from '@/config/styles/theme/theme';
+import { StoreProvider } from '@/providers';
 
 import type { Metadata } from 'next';
 
@@ -28,7 +28,9 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     >
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <StoreProvider>{children}</StoreProvider>
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

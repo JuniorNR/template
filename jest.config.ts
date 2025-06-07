@@ -12,11 +12,19 @@ const createJestConfig = nextJest({ dir: './' });
 const config: Config = {
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
+    '@/hooks': '<rootDir>/src/config/hooks',
     '@/styles': '<rootDir>/src/config/styles',
     '@/helpers': '<rootDir>/src/shared/lib/helpers',
     '@/ui': '<rootDir>/src/shared/ui',
     '@/assets/icons/(.*)': '<rootDir>/src/shared/assets/icons/$1',
     '@/features': '<rootDir>/src/features',
+    '@/providers': '<rootDir>/src/config/providers',
+    // types
+    '@/types': '<rootDir>/src/config/types',
+    '@/shared/types': '<rootDir>/src/shared/types',
+    '@/entities/types': '<rootDir>/src/entities/types',
+    '@/features/types': '<rootDir>/src/entities/types',
+    '@/widgets/types': '<rootDir>/src/entities/types',
   },
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,

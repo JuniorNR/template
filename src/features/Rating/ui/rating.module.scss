@@ -1,12 +1,19 @@
 $starHeight: 25px;
 $starWidth: 25px;
-$totalWidth: $starWidth * 5;
+$widthBetweenStars: 2px;
+$totalWidth: ($starWidth * 5) + ($widthBetweenStars * 2);
 
 .rating {
   display: flex;
+  align-items: center;
+  justify-content: center;
 
   width: $totalWidth;
   height: $starHeight;
+
+  &.isEditable {
+    cursor: pointer;
+  }
 }
 
 .star {
@@ -14,13 +21,17 @@ $totalWidth: $starWidth * 5;
 
   width: $starWidth;
   height: $starHeight;
-  
-  cursor: pointer;
 
   fill: colors.$backgroundColorLight;
 
+  padding: 0 $widthBetweenStars;
+
   &.filled {
     fill: colors.$backgroundColorAccent;
+  }
+  
+  &.choices {
+    stroke: colors.$gold;
   }
 
   & > svg {
@@ -29,16 +40,25 @@ $totalWidth: $starWidth * 5;
 
     transition-duration: .3s;
 
-    &:hover {
-      & > svg {
-        transform: scale(1.25);
-      }
-    }
-
     & > path {
       width: 25px;
       height: 25px;
 
       box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
-    }}
+    }
+  }
+
+  &:focus {
+    stroke: colors.$gold;
+
+    & > svg {
+      transform: scale(1.25);
+    }
+  }
+
+  &:hover {
+    & > svg {
+      transform: scale(1.25);
+    }
+  }
 }

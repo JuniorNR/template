@@ -9,11 +9,11 @@ import prettier from 'eslint-plugin-prettier';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 import { eslintRules } from './configs/eslint/rules/eslint.mjs';
+import { fsdImportRules } from './configs/eslint/rules/fsdImport.mjs';
 import { importRules } from './configs/eslint/rules/import.mjs';
 import { prettierRules } from './configs/eslint/rules/prettier.mjs';
 import { reactRules } from './configs/eslint/rules/react.mjs';
 import { typescriptRules } from './configs/eslint/rules/typescript.mjs';
-import { fsdImportRules } from './configs/eslint/rules/fsdImport.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -42,7 +42,7 @@ export const eslintRules = {
   'no-implicit-coercion': ['error', { allow: ['!!'] }],
   'no-else-return': ['error', { allowElseIf: false }],
   'max-depth': ['error', 5],
-  'max-nested-callbacks': ['error', 2],
+  'max-nested-callbacks': ['error', 3],
   'max-params': ['error', 5],
   'max-lines': [
     'error',
