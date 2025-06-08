@@ -50,6 +50,7 @@ export const RatingStar: FC<RatingStarProps> = ({
               filled: star.filled && styles.filled,
               choices: star.isChoice && styles.choices,
             })}
+            data-testid={`rating-star${star.order}`}
             tabIndex={isEditable ? 0 : -1}
             onMouseEnter={() => onEnter(star.order)}
             onMouseLeave={onLeave}
