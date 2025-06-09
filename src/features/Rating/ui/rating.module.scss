@@ -34,6 +34,10 @@ $totalWidth: ($starWidth * 5) + ($widthBetweenStars * 2);
     stroke: colors.$gold;
   }
 
+  &:not(.filled, .choices) {
+    stroke: colors.$textColorDark;
+  }
+
   & > svg {
     width: $starWidth;
     height: $starHeight;

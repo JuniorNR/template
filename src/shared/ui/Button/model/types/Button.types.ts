@@ -8,5 +8,5 @@ type ButtonPropsAccepted =
   | 'onClick';
 
 export interface ButtonProps extends Pick<MuiButtonProps, ButtonPropsAccepted> {
-  additionalClasses?: 'primary' | 'secondary';
+  additionalClasses?: string[];
 }

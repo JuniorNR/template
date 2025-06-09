@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type KeyboardEvent } from 'react';
 
 import { percentOfRating, starByPercent } from '../utils/rating.utils';
 
@@ -8,11 +8,13 @@ export const useStars = (
   rating: number,
   choices: number,
   isEditable: boolean,
+  onChange: ((rate: number) => void) | undefined,
 ): [
   Stars[],
   onEnter: (hoverOrder: number) => void,
   onLeave: () => void,
-  onSetChoice: (rate: number) => void,
+  onChangeClick: (starOrder: number) => void,
+  onChangeKeydown: (event: KeyboardEvent, starOrder: number) => void,
 ] => {
   const ratingPercent = percentOfRating(rating);
 
@@ -102,7 +104,7 @@ export const useStars = (
   };
 
   const onSetChoice = (rate: number) => {
-    if (choices !== 0) {
+    if (choices !== 0 && !isEditable) {
       return;
     }
 
@@ -116,5 +118,19 @@ export const useStars = (
     });
   };
 
-  return [stars, onEnter, onLeave, onSetChoice];
+  const onChangeClick = (starOrder: number) => {
+    if (onChange && choices === 0 && isEditable) {
+      onChange(starOrder);
+      onSetChoice(starOrder);
+    }
+  };
+
+  const onChangeKeydown = (event: KeyboardEvent, starOrder: number) => {
+    if (onChange && choices === 0 && event.code === 'Space' && isEditable) {
+      onChange(starOrder);
+      onSetChoice(starOrder);
+    }
+  };
+
+  return [stars, onEnter, onLeave, onChangeClick, onChangeKeydown];
 };

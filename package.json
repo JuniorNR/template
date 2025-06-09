@@ -6,12 +6,14 @@
     "dev": "next dev --turbopack",
     "debug": "next dev --turbopack & set NODE_OPTIONS='--inspect'",
     "build": "next build",
+    "build:sb": "storybook build",
     "start": "next start",
     "lint:ts": "next lint",
     "lint:scss": "stylelint \"**/*.{css,scss}\" --fix --ignore-path .gitignore",
     "unit": "jest",
     "unit:watch": "jest --watch",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sb": "storybook dev -p 6006"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -28,6 +30,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@storybook/addon-onboarding": "9.0.6",
+    "@storybook/nextjs": "9.0.6",
     "@stylistic/stylelint-plugin": "^3.1.2",
     "@tailwindcss/postcss": "^4.1.8",
     "@testing-library/dom": "^10.4.0",
@@ -47,11 +51,13 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.4.1",
     "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-storybook": "9.0.6",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "30.0.0-beta.8",
     "sass": "^1.89.1",
     "scss-reset": "^1.4.6",
+    "storybook": "9.0.6",
     "stylelint": "^16.20.0",
     "stylelint-config-standard-scss": "^15.0.1",
     "stylelint-order": "^7.0.0",

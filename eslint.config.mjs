@@ -1,3 +1,5 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -7,6 +9,7 @@ import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import prettier from 'eslint-plugin-prettier';
 import reactHooks from 'eslint-plugin-react-hooks';
+import storybook from 'eslint-plugin-storybook';
 
 import { eslintRules } from './configs/eslint/rules/eslint.mjs';
 import { fsdImportRules } from './configs/eslint/rules/fsdImport.mjs';
@@ -48,6 +51,7 @@ const eslintConfig = [
       // 'i18next/no-literal-string': 'warn',
     },
   },
+  ...storybook.configs['flat/recommended'],
 ];
 
 export default eslintConfig;

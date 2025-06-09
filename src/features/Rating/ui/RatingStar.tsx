@@ -1,5 +1,5 @@
 'use client';
-import { type FC, type KeyboardEvent } from 'react';
+import { type FC } from 'react';
 
 import { classNames } from '@/shared/lib';
 
@@ -15,25 +15,8 @@ export const RatingStar: FC<RatingStarProps> = ({
   choices,
   onChange,
 }) => {
-  const [stars, onEnter, onLeave, onSetChoice] = useStars(
-    rating,
-    choices,
-    isEditable,
-  );
-
-  const handleChangeClick = (starOrder: number) => {
-    if (onChange && choices === 0) {
-      onChange(starOrder);
-      onSetChoice(starOrder);
-    }
-  };
-
-  const handleChangeKeydown = (event: KeyboardEvent, starOrder: number) => {
-    if (onChange && choices === 0 && event.code === 'Space') {
-      onChange(starOrder);
-      onSetChoice(starOrder);
-    }
-  };
+  const [stars, onEnter, onLeave, handleChangeClick, handleChangeKeydown] =
+    useStars(rating, choices, isEditable, isEditable ? onChange : undefined);
 
   return (
     <div

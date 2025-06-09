@@ -7,11 +7,18 @@ import styles from './Button.module.scss';
 
 import type { ButtonProps } from '../model/types/Button.types';
 
-export const Button: FC<ButtonProps> = ({ children, ...props }) => {
+export const Button: FC<ButtonProps> = ({
+  children,
+  // additionalClasses,
+  ...props
+}) => {
+  // const hashedAdditionalClasses = additionalClasses?.map((additionalClass) => {
+  //   return styles[additionalClass];
+  // });
   return (
     <MuiButton
-      data-testid='button'
       className={classNames(styles.button)}
+      data-testid='button'
       {...props}
     >
       {children}
