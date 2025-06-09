@@ -27,8 +27,6 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/eslintrc": "^3.3.1",
     "@stylistic/stylelint-plugin": "^3.1.2",
     "@tailwindcss/postcss": "^4.1.8",
@@ -40,6 +38,7 @@
     "@types/node": "^22.15.30",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
+    "conventional-changelog-atom": "^5.0.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "15.3.3",
     "eslint-config-prettier": "^10.1.5",
