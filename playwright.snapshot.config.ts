@@ -1,19 +1,13 @@
 // @ts-check
-import path from 'path';
 
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv';
-
-const env = dotenv.config({
-  path: path.resolve(__dirname, '.env.tests'),
-}).parsed;
 
 const timestamp = new Date();
 const preparedDateToString = `${timestamp.getDate()}-${timestamp.getMonth() + 1}-${timestamp.getFullYear()}(${timestamp.getDay()})`;
 
 export default defineConfig({
-  testDir: env?.SNAPSHOT__URL_INPUT,
-  outputDir: `${env?.SNAPSHOT__URL_OUTPUT}/${preparedDateToString}/artifacts`,
+  testDir: './src/config/tests/snapshot',
+  outputDir: `./src/config/tests/snapshot/${preparedDateToString}/artifacts`,
   preserveOutput: 'always', // Сохранять артефакты даже для успешных тестов
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -28,7 +22,7 @@ export default defineConfig({
     [
       'html',
       {
-        outputFolder: `${env?.SNAPSHOT__URL_OUTPUT}/${preparedDateToString}/reports`,
+        outputFolder: `./src/config/tests/snapshot/${preparedDateToString}/reports`,
       },
     ],
     ['list'], // Консольный вывод
