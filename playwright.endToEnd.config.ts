@@ -4,7 +4,9 @@ import path from 'path';
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
-const env = dotenv.config({ path: path.resolve(__dirname, '.env') }).parsed;
+const env = dotenv.config({
+  path: path.resolve(__dirname, '.env.tests'),
+}).parsed;
 
 const timestamp = new Date();
 const preparedDateToString = `${timestamp.getDate()}-${timestamp.getMonth() + 1}-${timestamp.getFullYear()}(${timestamp.getDay()})`;

@@ -6,24 +6,18 @@
     "dev": "next dev --turbopack",
     "sb": "storybook dev -p 6006",
     "debug": "next dev --turbopack & set NODE_OPTIONS='--inspect'",
-
     "build": "next build",
     "build:sb": "storybook build",
     "start": "next start",
-
     "lint:ts": "next lint",
     "lint:scss": "stylelint \"**/*.{css,scss}\" --fix --ignore-path .gitignore",
-
     "test:unit": "jest",
     "test:unit:clear": "rm -rf \"src/config/tests/unit/results\"",
-
     "test:endToEnd": "playwright test --config=playwright.endToEnd.config.ts",
     "test:endToEnd:clear": "rm -rf \"src/config/tests/endToEnd/results\"",
-
     "test:snapshot": "playwright test --config=playwright.snapshot.config.ts",
     "test:snapshot:clear": "rm -rf \"src/config/tests/snapshot/results\"",
     "test:show": "playwright show-report",
-
     "prepare": "husky"
   },
   "dependencies": {
@@ -55,6 +49,7 @@
     "@types/react-dom": "^19.1.6",
     "conventional-changelog-atom": "^5.0.0",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.5.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "15.3.3",
     "eslint-config-prettier": "^10.1.5",
