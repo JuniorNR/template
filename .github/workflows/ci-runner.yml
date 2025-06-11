@@ -66,6 +66,18 @@ jobs:
 
       - name: unit testing
         run: pnpm test:unit
-        
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+      - name: Run endToEnd tests
+        run: pnpm test:endToEnd
+      - uses: actions/upload-artifact@v4
+        env:
+          CI: true
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-endToEnd
+          path: playwright-report/endToEnd
+          retention-days: 30
       - name: build project
         run: pnpm build

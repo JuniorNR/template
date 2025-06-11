@@ -27,13 +27,13 @@ jobs:
         name: playwright-report-endToEnd
         path: playwright-report/endToEnd
         retention-days: 30
-    # - name: Run snapshot tests
-    #   run: pnpm test:snapshot
-    # - uses: actions/upload-artifact@v4
-    #   env:
-    #     CI: true
-    #   if: ${{ !cancelled() }}
-    #   with:
-    #     name: playwright-report-snapshot
-    #     path: playwright-report/snapshot
-    #     retention-days: 30
+    - name: Run snapshot tests
+      run: pnpm test:snapshot
+    - uses: actions/upload-artifact@v4
+      env:
+        CI: true
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report-snapshot
+        path: playwright-report/snapshot
+        retention-days: 30
