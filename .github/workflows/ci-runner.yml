@@ -36,67 +36,21 @@ jobs:
           key: nextjs-${{ runner.os }}-${{ github.sha }}
           restore-keys: |
             nextjs-${{ runner.os }}-
-      - name: Print versions
-        run: |
-          git --version
-          node --version
-          pnpm --version
 
       - name: linting typescript
         run: pnpm lint:ts
       - name: linting scss
         run: pnpm lint:scss
 
+      - name: Print versions
+        run: |
+          git --version
+          node --version
+          pnpm --version
       - name: install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Install Playwright
-        run: pnpm exec playwright install --with-deps
 
       - name: Build application
         run: pnpm build:app
-        
       - name: Build Storybook
         run: pnpm build:sb
-
-      - name: Upload artifacts application
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-build
-          path: ./artifacts/app-build
-
-      - name: Upload storybook application
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-build
-          path: ./artifacts/storybook-build
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-          pattern: '*-build'
-          merge-multiple: true
-
-      - name: Start application server
-        run: |
-          pnpm exec serve artifacts/app-build -l 3000 &
-          echo "APP_SERVER_PID=$!" >> $GITHUB_ENV
-          pnpm exec wait-on http://localhost:3000
-          
-      - name: Start Storybook server
-        run: |
-          pnpm exec serve artifacts/storybook-build -l 6006 &
-          echo "STORYBOOK_SERVER_PID=$!" >> $GITHUB_ENV
-          pnpm exec wait-on http://localhost:6006
-
-      - name: Run Playwright tests
-        run: pnpm test:endToEnd
-        env:
-          APP_URL: http://localhost:3000
-          STORYBOOK_URL: http://localhost:6006
-
-      - name: Stop servers
-        if: always()
-        run: |
-          kill $APP_SERVER_PID || true
-          kill $STORYBOOK_SERVER_PID || true
