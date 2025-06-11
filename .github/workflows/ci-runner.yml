@@ -62,13 +62,13 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 10.11.0
-      - name: Restore pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ needs.setup-dependencies.outputs.store-path }}
-            node_modules
-          key: ${{ needs.setup-dependencies.outputs.cache-key }}
+      # - name: Restore pnpm cache
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ${{ needs.setup-dependencies.outputs.store-path }}
+      #       node_modules
+      #     key: ${{ needs.setup-dependencies.outputs.cache-key }}
       - name: linting typescript
         run: pnpm lint:ts
       - name: linting scss
@@ -88,13 +88,13 @@ jobs:
         with:
           version: 10.11.0
 
-      - name: Restore pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ needs.setup-dependencies.outputs.store-path }}
-            node_modules
-          key: ${{ needs.setup-dependencies.outputs.cache-key }}
+      # - name: Restore pnpm cache
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: |
+      #       ${{ needs.setup-dependencies.outputs.store-path }}
+      #       node_modules
+      #     key: ${{ needs.setup-dependencies.outputs.cache-key }}
 
       - name: Restore Next.js cache
         uses: actions/cache@v4
@@ -129,22 +129,14 @@ jobs:
         with:
           version: 10.11.0
 
-      - name: Restore pnpm cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ needs.setup-dependencies.outputs.store-path }}
-            node_modules
-          key: ${{ needs.setup-dependencies.outputs.cache-key }}
-
-      # - name: Restore dependencies
+      # - name: Restore pnpm cache
       #   uses: actions/cache@v4
       #   with:
       #     path: |
-      #       ${{ env.STORE_PATH }}
-      #       .pnpm-store
+      #       ${{ needs.setup-dependencies.outputs.store-path }}
       #       node_modules
       #     key: ${{ needs.setup-dependencies.outputs.cache-key }}
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
