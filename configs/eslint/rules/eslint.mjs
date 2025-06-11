@@ -1,7 +1,7 @@
 export const eslintRules = {
   'no-console': 'warn',
   'array-callback-return': 'error',
-  'no-await-in-loop': 'error',
+  'no-await-in-loop': 'warn',
   'no-inner-declarations': 'error',
   'no-promise-executor-return': 'error',
   'no-self-compare': 'error',

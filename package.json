@@ -4,16 +4,27 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "sb": "storybook dev -p 6006",
     "debug": "next dev --turbopack & set NODE_OPTIONS='--inspect'",
+
     "build": "next build",
     "build:sb": "storybook build",
     "start": "next start",
+
     "lint:ts": "next lint",
     "lint:scss": "stylelint \"**/*.{css,scss}\" --fix --ignore-path .gitignore",
-    "unit": "jest",
-    "unit:watch": "jest --watch",
-    "prepare": "husky",
-    "sb": "storybook dev -p 6006"
+
+    "test:unit": "jest",
+    "test:unit:clear": "rm -rf \"src/config/tests/unit/results\"",
+
+    "test:endToEnd": "playwright test --config=playwright.endToEnd.config.ts",
+    "test:endToEnd:clear": "rm -rf \"src/config/tests/endToEnd/results\"",
+
+    "test:snapshot": "playwright test --config=playwright.snapshot.config.ts",
+    "test:snapshot:clear": "rm -rf \"src/config/tests/snapshot/results\"",
+    "test:show": "playwright show-report",
+
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -30,7 +41,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
-    "@storybook/addon-onboarding": "9.0.6",
+    "@playwright/test": "^1.53.0",
     "@storybook/nextjs": "9.0.6",
     "@stylistic/stylelint-plugin": "^3.1.2",
     "@tailwindcss/postcss": "^4.1.8",
@@ -43,6 +54,7 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.6",
     "conventional-changelog-atom": "^5.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.28.0",
     "eslint-config-next": "15.3.3",
     "eslint-config-prettier": "^10.1.5",

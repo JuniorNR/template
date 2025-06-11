@@ -2,10 +2,13 @@
   "cSpell.words": [
     "autodocs",
     "commitlint",
+    "ENDTOEND",
     "Multilines",
     "nextjs",
     "noto",
+    "pnpx",
     "turbopack",
-    "vercel"
+    "vercel",
+    "viewports"
   ],
 }

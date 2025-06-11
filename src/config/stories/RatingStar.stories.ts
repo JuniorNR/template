@@ -1,4 +1,4 @@
-import { RatingStar } from './RatingStar';
+import { RatingStar } from '@/features';
 
 import type { Meta, StoryObj } from '@storybook/nextjs';
 

@@ -9,7 +9,13 @@ import type { Config } from 'jest';
 
 const createJestConfig = nextJest({ dir: './' });
 
+const timestamp = new Date();
+const preparedDateToString = `${timestamp.getDate()}-${timestamp.getMonth() + 1}-${timestamp.getFullYear()}(${timestamp.getDay()})`;
+
 const config: Config = {
+  testMatch: [
+    '<rootDir>/src/config/tests/unit/**/*.(spec|test).?([mc])[jt]s?(x)',
+  ],
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
     '@/hooks': '<rootDir>/src/config/hooks',
@@ -19,6 +25,7 @@ const config: Config = {
     '@/assets/icons/(.*)': '<rootDir>/src/shared/assets/icons/$1',
     '@/features': '<rootDir>/src/features',
     '@/providers': '<rootDir>/src/config/providers',
+    '@/shared': '<rootDir>/src/shared/ui',
     // types
     '@/types': '<rootDir>/src/config/types',
     '@/shared/types': '<rootDir>/src/shared/types',
@@ -35,7 +42,7 @@ const config: Config = {
   // automock: false,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
+  coverageDirectory: `<rootDir>/src/config/tests/unit/results/${preparedDateToString}/coverage`,
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
@@ -171,12 +178,6 @@ const config: Config = {
 
   // Adds a location field to test results
   // testLocationInResults: false,
-
-  // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/__tests__/**/*.?([mc])[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).?([mc])[jt]s?(x)"
-  // ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [

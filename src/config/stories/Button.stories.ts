@@ -1,6 +1,6 @@
 import { fn } from 'storybook/test';
 
-import { Button } from './Button';
+import { Button } from '@/shared';
 
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
