@@ -1,35 +1,40 @@
-name: CI/CD pipeline for Next.js
+name: CI pipeline
 on: [push, pull_request]
 jobs:
-  build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+  setup-dependencies:
+    name: Install dependencies
+    # strategy:
+    #   matrix:
+    #     os: [ubuntu-latest]
+    runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.pnpm-cache.outputs.cache-key }}
     steps:
-
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 10.11.0
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: pnpm
-
-      - name: Cache pnpm store
+      - name: Get pnpm store directory
+        id: pnpm-store
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Cache pnpm dependencies
+        id: pnpm-cache
         uses: actions/cache@v4
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ github.sha }}
-          restore-keys: | 
-            ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-
+          path: |
+            ${{ steps.pnpm-store.outputs.STORE_PATH }}
+            .pnpm-store
+            node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
       - name: Cache application build
         uses: actions/cache@v4
         with:
@@ -37,7 +42,6 @@ jobs:
           key: ${{ runner.os }}-nextjs-cache-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-nextjs-cache-
-
       # - name: Install commitlint
       #   run: pnpm install -D @commitlint/cli @commitlint/config-conventional
       - name: Print versions
@@ -46,38 +50,123 @@ jobs:
           node --version
           pnpm --version
           # pnpx commitlint --version
-
       # - name: Validate current commit (last commit) with commitlint
       #   if: github.event_name == 'push'
       #   run: pnpx commitlint --last --verbose
-
       # - name: Validate PR commits with commitlint
       #   if: github.event_name == 'pull_request'
       #   run: pnpx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
-
-      - name: install dependencies
+      - name: install node_modules dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Playwright
+        run: pnpm exec playwright install --with-deps
+
+  lint:
+    name: Linting typescript and scss
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    needs: setup-dependencies
+    steps:
       - name: linting typescript
         run: pnpm lint:ts
-
       - name: linting scss
         run: pnpm lint:scss
 
-      - name: unit testing
-        run: pnpm test:unit
+  build:
+    name: Building artifacts
+    strategy:
+      matrix:
+        target: [app, storybook]
+    runs-on: [ubuntu-latest]
+    needs: setup-dependencies
+    steps:
+      - uses: actions/checkout@v4
 
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
-      - name: Run endToEnd tests
-        run: pnpm test:endToEnd
-      - uses: actions/upload-artifact@v4
-        env:
-          CI: true
-        if: ${{ !cancelled() }}
+      - name: Restore dependencies
+        uses: actions/cache@v4
         with:
-          name: playwright-report-endToEnd
-          path: playwright-report/endToEnd
-          retention-days: 30
-      - name: build project
-        run: pnpm build
+          path: |
+            ${{ env.STORE_PATH }}
+            .pnpm-store
+            node_modules
+          key: ${{ needs.setup-dependencies.outputs.cache-key }}
+
+      - name: Build application
+        if: matrix.target == 'app'
+        run: pnpm build:app
+        
+      - name: Build Storybook
+        if: matrix.target == 'storybook'
+        run: pnpm build:sb
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.target }}-build
+          path: |
+            ${{ matrix.target == 'app' && 'out' || 'storybook-static' }}
+      # - name: build project
+      #   run: pnpm build
+      # - name: unit testing
+      #   run: pnpm test:unit
+      # - name: Install Playwright Browsers
+      #   run: pnpm exec playwright install --with-deps
+      # - name: Run endToEnd tests
+      #   run: pnpm test:endToEnd
+      # - uses: actions/upload-artifact@v4
+      #   env:
+      #     CI: true
+      #   if: ${{ !cancelled() }}
+      #   with:
+      #     name: playwright-report-endToEnd
+      #     path: playwright-report/endToEnd
+      #     retention-days: 30
+
+  test:
+    name: Run all tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.STORE_PATH }}
+            .pnpm-store
+            node_modules
+          key: ${{ needs.setup-dependencies.outputs.cache-key }}
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: '*-build'
+          merge-multiple: true
+
+      - name: Start application server
+        run: |
+          pnpm exec serve artifacts/app-build -l 3000 &
+          echo "APP_SERVER_PID=$!" >> $GITHUB_ENV
+          pnpm exec wait-on http://localhost:3000
+          
+      - name: Start Storybook server
+        run: |
+          pnpm exec serve artifacts/storybook-build -l 6006 &
+          echo "STORYBOOK_SERVER_PID=$!" >> $GITHUB_ENV
+          pnpm exec wait-on http://localhost:6006
+
+      - name: Run Playwright tests
+        run: pnpm test:endToEnd
+        env:
+          APP_URL: http://localhost:3000
+          STORYBOOK_URL: http://localhost:6006
+
+      - name: Stop servers
+        if: always()
+        run: |
+          kill $APP_SERVER_PID
+          kill $STORYBOOK_SERVER_PID

@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-test('Should render', async ({ page }) => {
-  await page.goto('');
+import { ENV_ENDTOEND } from './assets/constants';
 
-  await expect(page).toHaveURL('http://localhost:3000/');
+test('Should render', async ({ page }) => {
+  await page.goto(ENV_ENDTOEND.STORYBOOK_URL);
+
+  await expect(page).toHaveURL(ENV_ENDTOEND.STORYBOOK_URL);
 });
