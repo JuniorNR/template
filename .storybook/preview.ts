@@ -9,6 +9,12 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    // screenshot: {
+    //   // Глобальные настройки скриншотов (можно переопределить в каждой истории)
+    //   fullPage: true,
+    //   omitBackground: true,
+    //   timeout: 5000,
+    // },
   },
 };
 

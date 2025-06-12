@@ -37,7 +37,11 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
-
+  // webServer: {
+  //   command: 'pnpm dev:sb',
+  //   url: 'http://localhost:6006',
+  //   reuseExistingServer: !process.env.CI,
+  // },
   /* Configure projects for major browsers */
   projects: [
     {

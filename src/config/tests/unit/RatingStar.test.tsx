@@ -48,7 +48,6 @@ describe('RatingStar component', () => {
     render(<TestComponent />);
 
     const user = userEvent.setup();
-    const component = screen.getByTestId('rating');
     const star1 = screen.getByTestId('rating-star1');
     const star2 = screen.getByTestId('rating-star2');
     const star3 = screen.getByTestId('rating-star3');
