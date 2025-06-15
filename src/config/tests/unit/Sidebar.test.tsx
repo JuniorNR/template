@@ -1,12 +1,4 @@
 'use client';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import BedroomBabyIcon from '@mui/icons-material/BedroomBaby';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
-import WeekendIcon from '@mui/icons-material/Weekend';
-import WorkIcon from '@mui/icons-material/Work';
 import { render } from '@testing-library/react';
 
 import { AppRoutes, AppRoutesNotifications } from '@/shared/types';
@@ -19,53 +11,53 @@ describe('Sidebar', () => {
   it('Should render', () => {
     const sidebarList: SidebarList = [
       {
-        icon: <AccountBoxIcon />,
+        icon: <p>icon</p>,
         title: 'Profile',
         url: AppRoutes.PROFILE,
         notificationsUrl: AppRoutesNotifications.PROFILE_NOTIFICATIONS,
         notificationsCount: 1,
       },
       {
-        icon: <SelfImprovementIcon />,
+        icon: <p>icon</p>,
         title: 'Myself',
         url: AppRoutes.MYSELF,
         notificationsUrl: AppRoutesNotifications.MYSELF_NOTIFICATIONS,
         notificationsCount: 0,
       },
       {
-        icon: <FamilyRestroomIcon />,
+        icon: <p>icon</p>,
         title: 'Family',
         url: AppRoutes.FAMILY,
         notificationsUrl: AppRoutesNotifications.FAMILY_NOTIFICATIONS,
         notificationsCount: 99,
       },
       {
-        icon: <BedroomBabyIcon />,
+        icon: <p>icon</p>,
         title: 'Child',
         url: AppRoutes.CHILD,
         notificationsUrl: AppRoutesNotifications.CHILD_NOTIFICATIONS,
         notificationsCount: 2415,
       },
       {
-        icon: <WorkIcon />,
+        icon: <p>icon</p>,
         title: 'Work',
         notificationsUrl: AppRoutesNotifications.WORK_NOTIFICATIONS,
         url: AppRoutes.WORK,
       },
       {
-        icon: <WeekendIcon />,
+        icon: <p>icon</p>,
         title: 'Chilling',
         notificationsUrl: AppRoutesNotifications.CHILLING_NOTIFICATIONS,
         url: AppRoutes.CHILLING,
       },
       {
-        icon: <ListAltIcon />,
+        icon: <p>icon</p>,
         title: 'Todos',
         notificationsUrl: AppRoutesNotifications.TODOS_NOTIFICATIONS,
         url: AppRoutes.TODOS,
       },
       {
-        icon: <EmojiEventsIcon />,
+        icon: <p>icon</p>,
         title: 'Achievements',
         notificationsUrl: AppRoutesNotifications.ACHIEVEMENTS_NOTIFICATIONS,
         url: AppRoutes.ACHIEVEMENTS,
