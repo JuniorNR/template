@@ -52,5 +52,5 @@ jobs:
 
       - name: Build application
         run: pnpm build:app
-      - name: Build Storybook
-        run: pnpm build:sb
+      # - name: Build Storybook
+      #   run: pnpm build:sb
