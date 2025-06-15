@@ -1,0 +1,8 @@
+.rootLayout {
+  display: flex;
+
+  height: 100vh;
+
+  padding: sizes.rem(40) sizes.rem(100);
+  gap: sizes.rem(15);
+}

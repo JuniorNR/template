@@ -1,0 +1,17 @@
+$sidebarHeight: calc(100vh - sizes.rem(80));
+
+.sidebar {
+  width: 150px;
+  height: $sidebarHeight;
+
+  background-color: colors.$backgroundColorWidget;
+  box-shadow: colors.$shadow;
+
+  & > ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: $sidebarHeight;
+  }
+}

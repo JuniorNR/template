@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     prependData: `
       @use "./variables/sizes" as sizes;
       @use "./variables/colors" as colors;
+      @use './variables/transitions' as transitions;
     `,
   },
   turbopack: {

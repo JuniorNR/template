@@ -1,0 +1,122 @@
+.badge {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 5px;
+  height: 5px;
+  padding: 15px;
+
+  transition: transitions.$slow;
+
+  color: colors.$badgeTextColor;
+
+  border-radius: 50%;
+
+  background-color: colors.$badgeColor;
+
+  font-size: sizes.$text12;
+
+  &:not(.badgeDisabled) {
+    animation: pulse 1.5s infinite;
+
+    &.focused {
+      background: colors.$gradientOnFocus2;
+    }
+  }
+
+  &:not(.badgeDisabled):hover {
+    color: colors.$badgeHoverTextColor;
+    background-color: colors.$badgeHoverColor
+  }
+
+  &.badgeDisabled {
+    cursor: default;
+
+    background-color: colors.$badgeDisabledColor;
+  }
+
+
+}
+
+.sidebarItem {
+  position: relative;
+
+  cursor: pointer;
+
+  & > .sidebarItemInner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 150px;
+    height: calc((100vh - sizes.rem(80)) / 8);
+
+
+    transition: transitions.$fast;
+
+    background-color: colors.$backgroundColorWidgetItem;
+
+    & > svg {
+      transition: transitions.$fast;
+
+      font-size: sizes.rem(50);
+    }
+
+    &:not(.disabled) {
+      &.focused {
+        background: colors.$gradientOnFocus1;
+      }
+
+      &.active {
+        background-color: colors.$accentColorActive;
+
+        &:hover {
+          background-color: colors.$accentColor;
+        }
+      }
+
+
+    }
+
+    &.disabled {
+      cursor: default;
+
+      color: colors.$disabledTextColor;
+
+      background-color: colors.$disabledBackground;
+    }
+  }
+
+  &:hover {
+    & > .sidebarItemInner:not(.disabled) {
+      color: colors.$accentColorReverse;
+      background-color: colors.$accentColor;
+
+      & > svg {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.05);
+
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}

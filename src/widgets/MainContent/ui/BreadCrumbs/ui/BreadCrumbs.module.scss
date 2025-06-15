@@ -1,0 +1,68 @@
+.breadCrumbs {
+  display: flex;
+
+  width: fit-content;
+}
+
+.breadCrumbsItem {
+  display: flex;
+  align-items: center;
+
+  width: 150px;
+
+  height: 25px;
+  padding-left: 25px;
+
+  cursor: default;
+
+  transition: transitions.$fast;
+
+  color: colors.$breadcrumbTextColor;
+
+  background-color: colors.$breadcrumbColor;
+
+  &:focus {
+    color: colors.$breadcrumbFocusTextColor;
+    background-color: colors.$breadcrumbFocusColor;
+  }
+
+  &:only-child {
+    cursor: default;
+  }
+
+  &:last-child {
+    color: colors.$breadcrumbHoverTextColor;
+    background-color: colors.$breadcrumbHoverColor;
+  }
+
+  &:first-child {
+    padding-left: 10px;
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 0%,
+      calc(100% - 25px) 100%,
+      0 100%
+    );
+  }
+
+  &:not(:first-child) {
+    margin-left: -20px;
+    clip-path: polygon(
+      calc(0% + 25px) 0%,
+      100% 0%,
+      100% 0%,
+      calc(100% - 25px) 100%,
+      0 100%
+    );
+  }
+
+  &:not(:last-child) {
+    cursor: pointer;
+    
+    &:hover {
+      color: colors.$breadcrumbHoverTextColor;
+      background-color: colors.$breadcrumbHoverColor;
+    }
+  }
+}

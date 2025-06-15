@@ -17,15 +17,16 @@ const config: Config = {
     '<rootDir>/src/config/tests/unit/**/*.(spec|test).?([mc])[jt]s?(x)',
   ],
   moduleNameMapper: {
+    '\\.module\\.scss$': 'identity-obj-proxy',
     '@/(.*)': '<rootDir>/src/$1',
     '@/hooks': '<rootDir>/src/config/hooks',
     '@/styles': '<rootDir>/src/config/styles',
     '@/helpers': '<rootDir>/src/shared/lib/helpers',
-    '@/ui': '<rootDir>/src/shared/ui',
     '@/assets/icons/(.*)': '<rootDir>/src/shared/assets/icons/$1',
     '@/features': '<rootDir>/src/features',
     '@/providers': '<rootDir>/src/config/providers',
-    '@/shared': '<rootDir>/src/shared/ui',
+    '@/shared': '<rootDir>/src/shared',
+    '@/widgets': '<rootDir>/src/widgets',
     // types
     '@/types': '<rootDir>/src/config/types',
     '@/shared/types': '<rootDir>/src/shared/types',
