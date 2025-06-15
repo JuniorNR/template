@@ -36,20 +36,17 @@ jobs:
           key: nextjs-${{ runner.os }}-${{ github.sha }}
           restore-keys: |
             nextjs-${{ runner.os }}-
-
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
       - name: linting typescript
         run: pnpm lint:ts
       - name: linting scss
         run: pnpm lint:scss
-
       - name: Print versions
         run: |
           git --version
           node --version
           pnpm --version
-      - name: install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Build application
         run: pnpm build:app
       # - name: Build Storybook
