@@ -11,12 +11,11 @@ import { TESTS_PATH } from '../model/utils/BreadCrumbs.utils';
 import styles from './BreadCrumbs.module.scss';
 
 export const BreadCrumbs: FC = () => {
-  const [pathToRedirect, setPathToRedirect] = useState<string>('');
+  const [pathToRedirect, setPathToRedirect] = useState<string>(''); // TODO: Разобраться с ссылками
   const path = usePathname() || TESTS_PATH;
 
   const renderBreadCrumbs = () => {
     const splittedPaths = path.split('/').filter(Boolean);
-
     return splittedPaths.map((splittedPath, index) => {
       if (pathToRedirect !== path) {
         return (

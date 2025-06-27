@@ -5,7 +5,7 @@ export const eslintRules = {
   'no-inner-declarations': 'error',
   'no-promise-executor-return': 'error',
   'no-self-compare': 'error',
-  'no-useless-assignment': 'error',
+  'no-useless-assignment': 'off',
   'block-scoped-var': 'error',
   'class-methods-use-this': 'error',
   'default-case': 'error',

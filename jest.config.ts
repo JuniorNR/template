@@ -19,7 +19,7 @@ const config: Config = {
   moduleNameMapper: {
     '\\.module\\.scss$': 'identity-obj-proxy',
     '@/(.*)': '<rootDir>/src/$1',
-    '@/hooks': '<rootDir>/src/config/hooks',
+    '@/hooks': '<rootDir>/src/shared/lib/hooks',
     '@/styles': '<rootDir>/src/config/styles',
     '@/helpers': '<rootDir>/src/shared/lib/helpers',
     '@/assets/icons/(.*)': '<rootDir>/src/shared/assets/icons/$1',

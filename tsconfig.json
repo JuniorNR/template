@@ -27,7 +27,7 @@
     "paths": {
       // jest.config.ts
       "@/*": ["./src/*"],
-      "@/hooks": ["./src/config/hooks/index"],
+      "@/hooks": ["./src/shared/lib/hooks/index"],
       "@/styles": ["./src/config/styles/index"],
       "@/helpers": ["./src/shared/lib/helpers/index"],
       "@/ui": ["./src/shared/ui/index"],

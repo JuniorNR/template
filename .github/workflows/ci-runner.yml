@@ -47,6 +47,8 @@ jobs:
           git --version
           node --version
           pnpm --version
+      - name: running unit tests
+        run: pnpm test:unit
       - name: Build application
         run: pnpm build:app
       # - name: Build Storybook
