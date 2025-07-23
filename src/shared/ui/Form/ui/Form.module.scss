@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: sizes.rem(10);
+
+  border: 2px solid colors.$accentColor;
+
+  &.error {
+    border: 2px solid colors.$errorColor;
+  }
+
+  &.success {
+    border: 2px solid colors.$successColor;
+  }
+}
+
+.formContent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: sizes.rem(10);
+
+  padding: 0 sizes.rem(10);
+}

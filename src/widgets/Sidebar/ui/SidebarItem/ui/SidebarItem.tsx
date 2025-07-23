@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { useState, type FC } from 'react';
 
-import { classNames } from '@/shared/lib';
-import { AppRoutes } from '@/shared/types';
+import { classNames, AppRoutes } from '@/shared/lib';
 
 import styles from './sidebarItem.module.scss';
 

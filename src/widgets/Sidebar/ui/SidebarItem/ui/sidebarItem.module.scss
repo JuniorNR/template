@@ -31,7 +31,7 @@
 
   &:not(.badgeDisabled):hover {
     color: colors.$badgeHoverTextColor;
-    background-color: colors.$badgeHoverColor
+    background-color: colors.$badgeHoverColor;
   }
 
   &.badgeDisabled {
@@ -70,10 +70,12 @@
 
     &:not(.disabled) {
       &.focused {
-        background: colors.$gradientOnFocus1;
+        color: colors.$accentColorActive;
+        background: colors.$accentColor;
       }
 
       &.active {
+        color: colors.$accentColor;
         background-color: colors.$accentColorActive;
 
         &:hover {
@@ -81,6 +83,10 @@
         }
       }
 
+      &.focused.active {
+        color: colors.$accentColorActive;
+        background: colors.$accentColor;
+      }
 
     }
 

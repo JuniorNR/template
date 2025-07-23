@@ -1,7 +1,7 @@
 'use client';
 import { render } from '@testing-library/react';
 
-import { AppRoutes, AppRoutesNotifications } from '@/shared/types';
+import { AppRoutes, AppRoutesNotifications } from '@/shared/lib';
 import type { SidebarList } from '@/widgets';
 import { Sidebar } from '@/widgets';
 

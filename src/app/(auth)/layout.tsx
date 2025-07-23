@@ -1,7 +1,7 @@
+import '@/config/styles/index.scss';
 import { ThemeProvider } from '@mui/material/styles';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Noto_Sans as notoSansFont } from 'next/font/google';
-import '@/config/styles/index.scss';
 
 import theme from '@/config/styles/theme/theme';
 import { StoreProvider } from '@/providers';

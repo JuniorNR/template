@@ -1,9 +1,10 @@
-@use 'scss-reset/reset';
+@use './reset';
 
 // START Закинуть эти строчки в next.config.ts
-@use './variables/colors' as colors;
 @use './variables/sizes' as sizes;
+@use './variables/colors' as colors;
 @use './variables/transitions' as transitions;
+@use './variables/mixins' as mixins;
 
 // END
 
@@ -12,10 +13,6 @@ body {
   background-color: colors.$backgroundColorPage;
 
   font-family: var(--font-noto-sans);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: colors.$headerTextColor;
 }
 
 a {

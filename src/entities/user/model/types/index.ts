@@ -1,1 +1,1 @@
-export type { User } from './user.types';
+export type { User, UserDTO } from './user.types';

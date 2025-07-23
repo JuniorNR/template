@@ -1,0 +1,17 @@
+.formButtonControls {
+  display: flex;
+  align-items: center;
+
+  padding: 0 sizes.rem(10) sizes.rem(10) sizes.rem(10);
+  gap: sizes.rem(10);
+
+  & > .formButtons {
+    align-self: flex-end;
+
+    width: 50%;
+  }
+
+  & > .formInfo {
+    width: 50%;
+  }
+}

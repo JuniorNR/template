@@ -1,19 +1,28 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit/react';
 
-interface User {
-  name: string;
-}
+import type { User } from '../types';
 
 const initialState: User = {
-  name: 'Oleg',
+  id: 0,
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  email: '',
+  login: '',
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
+    setFirstName: (state, action: PayloadAction<string>) => {
+      state.firstName = action.payload;
+    },
+    setMiddleName: (state, action: PayloadAction<string>) => {
+      state.firstName = action.payload;
+    },
+    setLastName: (state, action: PayloadAction<string>) => {
+      state.firstName = action.payload;
     },
   },
 });

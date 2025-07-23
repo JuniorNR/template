@@ -1,7 +1,10 @@
 import type { FC } from 'react';
-import { Button as MuiButton } from '@mui/material';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
 import { classNames } from '@/helpers';
+
+import { Loader } from '../../Loader';
+import { ButtonStatuses } from '../model/utils/Button.utils';
 
 import styles from './Button.module.scss';
 
@@ -9,19 +12,43 @@ import type { ButtonProps } from '../model/types/Button.types';
 
 export const Button: FC<ButtonProps> = ({
   children,
-  // additionalClasses,
+  status,
+  iconStart,
+  iconEnd,
+  loading = false,
+  fullWidth = false,
+  disabled,
   ...props
 }) => {
-  // const hashedAdditionalClasses = additionalClasses?.map((additionalClass) => {
-  //   return styles[additionalClass];
-  // });
+  const preparedStylesByProps = {
+    [styles.error]: status === ButtonStatuses.ERROR,
+    [styles.success]: status === ButtonStatuses.SUCCESS,
+    [styles.info]: status === ButtonStatuses.INFO,
+    [styles.attention]: status === ButtonStatuses.ATTENTION,
+    [styles.fullWidth]: fullWidth,
+  };
+  const renderIconEndOrLoading = () => {
+    if (loading) {
+      return <Loader />;
+    }
+
+    if (iconEnd) {
+      return iconEnd;
+    }
+  };
+
   return (
-    <MuiButton
-      className={classNames(styles.button)}
+    <button
+      className={classNames(styles.button, { ...preparedStylesByProps })}
       data-testid='button'
+      tabIndex={0}
+      type='button'
+      disabled={disabled || loading}
       {...props}
     >
+      {iconStart ?? null}
       {children}
-    </MuiButton>
+      {renderIconEndOrLoading()}
+    </button>
   );
 };

@@ -21,3 +21,10 @@ export enum AppRoutesNotifications {
   TODOS_NOTIFICATIONS = '/todos/notifications',
   ACHIEVEMENTS_NOTIFICATIONS = '/achievements/notifications',
 }
+
+export enum AppRoutesProfile {
+  INFO = AppRoutes.PROFILE,
+  NOTIFICATIONS = AppRoutesNotifications.PROFILE_NOTIFICATIONS,
+  SETTINGS = AppRoutes.PROFILE + '/settings',
+  LOG_OUT = AppRoutes.PROFILE + '/log-out',
+}

@@ -1,0 +1,8 @@
+.profileCard {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  padding: sizes.rem(15);
+  gap: sizes.rem(15);
+}

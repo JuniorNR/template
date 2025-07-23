@@ -33,7 +33,7 @@ export const Sidebar: FC<SidebarProps> = ({ sidebarList }) => {
             notificationsUrl={item.notificationsUrl}
             active={currentPage === item.url}
             notificationsCount={item.notificationsCount}
-            // disabled={item.url !== '/profile'}
+            disabled={item.disabled}
           />
         ))}
       </ul>

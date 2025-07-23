@@ -2,4 +2,4 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { getUser } from './getUser.selector';
 
-export const setName = createSelector(getUser, (user) => user.name);
+export const getUserEmail = createSelector(getUser, (user) => user.email);

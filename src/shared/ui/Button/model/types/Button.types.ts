@@ -1,12 +1,12 @@
-import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
+import type { ButtonHTMLAttributes } from 'react';
 
-type ButtonPropsAccepted =
-  | 'variant'
-  | 'title'
-  | 'disabled'
-  | 'children'
-  | 'onClick';
+import type { ButtonStatuses } from '../utils/Button.utils';
 
-export interface ButtonProps extends Pick<MuiButtonProps, ButtonPropsAccepted> {
-  additionalClasses?: string[];
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  loading?: boolean;
+  status?: ButtonStatuses;
+  iconStart?: React.ReactNode;
+  iconEnd?: React.ReactNode;
+  fullWidth?: boolean;
 }

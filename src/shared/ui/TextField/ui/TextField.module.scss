@@ -1,0 +1,183 @@
+.textField {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  box-sizing: border-box;
+  min-width: 250px;
+
+  transition: transitions.$fast;
+
+  border: 2px solid colors.$accentColor;
+  background-color: colors.$backgroundColorWidget;
+
+  &.error {
+    border: 2px solid colors.$errorColor;
+  }
+
+  &.info {
+    border: 2px solid colors.$infoColor;
+  }
+
+  &.success {
+    border: 2px solid colors.$successColor;
+  }
+
+  &.attention {
+    border: 2px solid colors.$attentionColor;
+  }
+
+  & > .inputPasswordWrapper {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding-right: sizes.rem(10);
+
+    & > div {
+      top: 0;
+      right: 0;
+
+      width: 24px;
+      height: 24px;
+      margin-left: sizes.rem(10);
+
+      cursor: pointer;
+
+      transition: transitions.$slow;
+
+      & > svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      &:hover > svg {
+        fill: colors.$accentColorActive;
+      }      
+    }
+  }
+
+  & > .textFieldInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    line-height: 20px;
+
+    & > .label {
+      display: flex;
+      align-items: center;
+
+      padding: sizes.rem(0) sizes.rem(15) 0 sizes.rem(5);
+
+      transition: transitions.$fast;
+
+      text-align: start;
+      white-space: nowrap;
+
+      color: colors.$accentColorReverse;
+      background-color: colors.$accentColor;
+
+      font-size: sizes.$text14;
+      
+      clip-path: polygon(0% 0%, 100% 0%, 100% 0%, calc(100% - 15px) 100%, 0 100%);
+
+      & > .statusIcons {
+        display: flex;
+        align-items: center;
+
+        
+        & > svg {
+          margin-left: sizes.rem(5);
+
+          font-size: sizes.$text16;
+        }
+      }
+
+      &.error {
+        color: colors.$textColor2;
+        background-color: colors.$errorColor;
+      }
+
+      &.info {
+        color: colors.$textColor2;
+        background-color: colors.$infoColor;
+      }
+
+      &.success {
+        color: colors.$textColor2;
+        background-color: colors.$successColor;
+      }
+
+      &.attention {
+        color: colors.$textColor2;
+        background-color: colors.$attentionColor;
+      }
+    }
+
+    & .helperText {
+      float: right;
+      overflow: hidden;
+      flex-grow: 1;
+
+      width: 100%; 
+
+      padding: 0 sizes.rem(10);
+
+      text-align: end;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      font-size: sizes.$text14;
+
+      &.error, &.info, &.success, &.attention {
+        color: colors.$textColor2;
+      }
+    }
+  }
+
+  &:hover {
+    border: 2px solid colors.$accentColorActive;
+
+    & > .textFieldInfo {
+      & > .label {
+        color: colors.$accentColor;
+        background-color: colors.$accentColorActive
+      }
+    }
+  }
+
+  &.focused {
+    border: 2px solid colors.$accentColorActive;
+
+    & > .textFieldInfo {
+      & > .label {
+        color: colors.$accentColor;
+        background-color: colors.$accentColorActive
+      }
+    }
+  }
+
+  & .input {
+    width: 100%;
+    height: 30px;
+    padding: sizes.rem(0) sizes.rem(10);
+
+    color: colors.$textColor;
+
+    border: none;
+    outline: none;
+    background: colors.$backgroundColorWidget;
+
+    font-size: sizes.$text14;
+    line-height: 30px;
+
+    &::placeholder {
+      color: colors.$textColor;
+    }
+  }
+}

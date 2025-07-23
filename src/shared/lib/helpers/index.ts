@@ -1,2 +1,2 @@
 export { classNames } from './classNames';
-export { fetchData } from './fetchData';
+export { handleFetch } from './handleFetch';

@@ -1,0 +1,73 @@
+.navigationMenuHorizontalItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100px;
+
+  transition: transitions.$fast;
+
+  background-color: colors.$backgroundColorWidgetItem;
+
+  &Link {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding: sizes.rem(10);
+
+    &:focus {
+      border: 2px solid colors.$focusColor;
+    }
+
+    & > svg {
+      color: colors.$accentColor;
+
+      font-size: sizes.rem(32);
+    }
+
+    & > h3 {
+      color: colors.$accentColor;
+    }
+  }
+
+  &.active > &Link {
+    cursor: default;
+  }
+
+  &:hover {
+    flex-grow: 1;
+    
+    background-color: colors.$accentColor;
+
+    &:not(.active) h3, &:not(.active) svg {
+      color: colors.$accentColorReverse;
+    }
+  }
+
+  &.active {
+    flex-grow: 1;
+
+    background-color: colors.$accentColorActive;
+  }
+
+  &:not(.active) {
+    cursor: pointer;
+  }
+
+  &.disabled {
+    flex-grow: 0;
+
+    cursor: default;
+
+    background-color: colors.$disabledBackground;
+
+    &:not(.active) h3, &:not(.active) svg, &:hover h3, &:hover svg  {
+      color: colors.$disabledTextColor;
+    }
+  }
+}

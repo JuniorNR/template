@@ -1,0 +1,27 @@
+.formTitle {
+  width: fit-content;
+  padding: 0 sizes.rem(15) 0 sizes.rem(10);
+
+  transition: transitions.$slow;
+
+  text-transform: uppercase;
+
+  color: colors.$textColorReverse;
+
+  background-color: colors.$accentColor;
+
+  font-weight: 500;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, calc(100% - 15px) 100%, 0 100%);
+
+  &.error, &.success {
+    color: colors.$textColor2;
+  }
+
+  &.error {
+    background-color: colors.$errorColor;
+  }
+
+  &.success {
+    background-color: colors.$successColor;
+  }
+}

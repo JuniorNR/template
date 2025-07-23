@@ -7,9 +7,10 @@ const nextConfig: NextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'src/config/styles')],
     prependData: `
+    @use "./variables/colors" as colors;
       @use "./variables/sizes" as sizes;
-      @use "./variables/colors" as colors;
       @use './variables/transitions' as transitions;
+      @use './variables/mixins' as mixins;
     `,
   },
   turbopack: {
@@ -27,7 +28,6 @@ const nextConfig: NextConfig = {
       },
     },
   },
-  // experimental: { workerThreads: true, cpus: 4 },
 };
 
 export default nextConfig;

@@ -1,9 +1,62 @@
 .button {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+
   padding: sizes.rem(10);
 
-  border-radius: 5px;
-  background-color: colors.$backgroundColorAccent;
+  cursor: pointer;
 
-  font-family: none;
+  color: colors.$textColorReverse;
+
+  border: none;
+  border-radius: 0;
+  background-color: colors.$accentColor;
+
   font-size: sizes.$text14;
+  font-weight: 600;
+  gap: sizes.rem(5);
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  & > svg {
+    font-size: sizes.$text20;
+  }
+
+  &.error, &.info, &.success, &.attention {
+    color: colors.$textColor2;
+  }
+
+  &.error {
+    background-color: colors.$errorColor;
+  }
+
+  &.info {
+    background-color: colors.$infoColor;
+  }
+
+  &.success {
+    background-color: colors.$successColor;
+  }
+
+  &.attention {
+    background-color: colors.$attentionColor;
+  }
+
+  &:hover, &:focus {
+    color: colors.$accentColor;
+    background-color: colors.$accentColorActive;
+  }
+
+  &:disabled {
+    cursor: default;
+
+    color: colors.$disabledTextColor;;
+    background-color: colors.$disabledBackground;
+
+    font-weight: 500;
+  }
 }
