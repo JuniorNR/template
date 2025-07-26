@@ -13,7 +13,7 @@ import type { FormValues } from '../model/schemas/passwordChangeForm.schema';
 export const PasswordChangeForm: FC = () => {
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     control,
   } = useForm<FormValues>({
     resolver: zodResolver(passwordChangeFormSchema),
@@ -27,7 +27,7 @@ export const PasswordChangeForm: FC = () => {
     handleFetch<Pick<UserDTO, 'id'> & { password: string }>(
       '/user/update-password',
       {
-        method: 'POST',
+        method: 'PATCH',
         data: { id: 1, password: data.password },
       },
     );
@@ -37,15 +37,16 @@ export const PasswordChangeForm: FC = () => {
       title='Password change'
       loading={isSubmitting}
       errors={errors}
+      isValid={isValid}
       onSubmit={onSubmit}
     >
       <Controller
         render={({ field, fieldState }) => {
           return (
             <TextField
+              autoComplete='new-password'
               type='password'
               label='Password'
-              autoComplete='off'
               disabled={isSubmitting}
               placeholder='Enter password...'
               status={fieldState.error ? 'error' : undefined}
@@ -61,9 +62,9 @@ export const PasswordChangeForm: FC = () => {
         render={({ field, fieldState }) => {
           return (
             <TextField
+              autoComplete='new-password'
               type='password'
               label='Confirm password'
-              autoComplete='off'
               disabled={isSubmitting}
               placeholder='Enter password...'
               status={fieldState.error ? 'error' : undefined}

@@ -54,7 +54,7 @@
       }
 
       &:hover > svg {
-        fill: colors.$accentColorActive;
+        fill: colors.$accentColor2;
       }      
     }
   }
@@ -79,7 +79,7 @@
       text-align: start;
       white-space: nowrap;
 
-      color: colors.$accentColorReverse;
+      color: colors.$accentColor3;
       background-color: colors.$accentColor;
 
       font-size: sizes.$text14;
@@ -141,23 +141,23 @@
   }
 
   &:hover {
-    border: 2px solid colors.$accentColorActive;
+    border: 2px solid colors.$accentColor2;
 
     & > .textFieldInfo {
       & > .label {
         color: colors.$accentColor;
-        background-color: colors.$accentColorActive
+        background-color: colors.$accentColor2;
       }
     }
   }
 
   &.focused {
-    border: 2px solid colors.$accentColorActive;
+    border: 2px solid colors.$accentColor2;
 
     & > .textFieldInfo {
       & > .label {
         color: colors.$accentColor;
-        background-color: colors.$accentColorActive
+        background-color: colors.$accentColor2;
       }
     }
   }

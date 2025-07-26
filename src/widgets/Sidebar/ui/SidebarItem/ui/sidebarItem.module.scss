@@ -13,11 +13,11 @@
 
   transition: transitions.$slow;
 
-  color: colors.$badgeTextColor;
+  color: colors.$textColor3;
 
   border-radius: 50%;
 
-  background-color: colors.$badgeColor;
+  background-color: colors.$accentColor;
 
   font-size: sizes.$text12;
 
@@ -25,19 +25,20 @@
     animation: pulse 1.5s infinite;
 
     &.focused {
-      background: colors.$gradientOnFocus2;
+      color: colors.$accentColor;
+      background: colors.$accentColor3;
     }
   }
 
   &:not(.badgeDisabled):hover {
-    color: colors.$badgeHoverTextColor;
-    background-color: colors.$badgeHoverColor;
+    color: colors.$accentColor;
+    background-color: colors.$accentColor3;
   }
 
   &.badgeDisabled {
     cursor: default;
 
-    background-color: colors.$badgeDisabledColor;
+    background-color: colors.$disabledBackgroundColor;
   }
 
 
@@ -70,21 +71,22 @@
 
     &:not(.disabled) {
       &.focused {
-        color: colors.$accentColorActive;
+        color: colors.$accentColor2;
         background: colors.$accentColor;
       }
 
       &.active {
         color: colors.$accentColor;
-        background-color: colors.$accentColorActive;
+        background-color: colors.$accentColor2;
 
         &:hover {
+          color: colors.$accentColor2;
           background-color: colors.$accentColor;
         }
       }
 
       &.focused.active {
-        color: colors.$accentColorActive;
+        color: colors.$accentColor2;
         background: colors.$accentColor;
       }
 
@@ -95,17 +97,26 @@
 
       color: colors.$disabledTextColor;
 
-      background-color: colors.$disabledBackground;
+      background-color: colors.$disabledBackgroundColor2;
     }
   }
 
   &:hover {
     & > .sidebarItemInner:not(.disabled) {
-      color: colors.$accentColorReverse;
+      color: colors.$accentColor2;
       background-color: colors.$accentColor;
 
       & > svg {
         transform: scale(1.2);
+      }
+    }
+
+    & > .badge:not(.badgeDisabled) {
+      color: colors.$accentColor;
+      background-color: colors.$accentColor2;
+
+      &:hover {
+        background-color: colors.$accentColor3;
       }
     }
   }

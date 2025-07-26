@@ -8,7 +8,7 @@ import { FormTitle } from './FormTitle';
 
 import styles from './Form.module.scss';
 
-import type { FormProps } from '../model/types/Form.types';
+import type { FormProps, FormStatuses } from '../model/types/Form.types';
 
 export const Form: FC<FormProps> = ({
   children,
@@ -16,13 +16,12 @@ export const Form: FC<FormProps> = ({
   onSubmit,
   loading,
   errors,
+  isValid,
   ...props
 }) => {
-  const [statusForm, setStatusForm] = useState<'idle' | 'success' | 'error'>(
-    'idle',
-  );
+  const [statusForm, setStatusForm] = useState<FormStatuses>('idle');
 
-  const handleChangeStatusForm = (statusForm: 'idle' | 'success' | 'error') => {
+  const handleChangeStatusForm = (statusForm: FormStatuses) => {
     setStatusForm(statusForm);
   };
   return (
@@ -30,6 +29,7 @@ export const Form: FC<FormProps> = ({
       className={classNames(styles.form, {
         [styles.success]: statusForm === 'success',
         [styles.error]: statusForm === 'error',
+        [styles.noValid]: statusForm === 'noValid',
       })}
       {...props}
     >
@@ -43,6 +43,7 @@ export const Form: FC<FormProps> = ({
         statusForm={statusForm}
         loading={loading}
         errors={errors}
+        isValid={isValid}
         changeStatusForm={handleChangeStatusForm}
         onSubmit={onSubmit}
       />

@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+
 type UseFetchOptions = RequestInit & {
   skip?: boolean;
 };
@@ -15,15 +16,17 @@ export const handleFetch = async <T>(
         `${process.env.NEXT_PUBLIC_API_URL}${url}`
       : `${process.env.NEXT_PUBLIC_API_URL}/${url}`;
 
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      ...options?.headers,
+    };
+
     const response = await fetch(fullUrl, {
       ...options,
       body: JSON.stringify(options?.data),
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        ...options?.headers,
-      },
+      headers,
     });
 
     if (!response.ok) {

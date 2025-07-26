@@ -7,4 +7,5 @@ export interface FormButtonControlsProps {
   changeStatusForm: (status: FormStatuses) => void;
   errors?: FieldErrors;
   loading?: boolean;
+  isValid?: boolean;
 }

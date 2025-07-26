@@ -13,6 +13,7 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
   errors,
   statusForm,
   changeStatusForm,
+  isValid,
 }) => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const holdStatusMS = 3000;
@@ -44,12 +45,25 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
     }
   };
 
+  const canHandleSubmit = () => {
+    switch (statusForm) {
+      case 'idle':
+        return true;
+      case 'success':
+        return false;
+      case 'error':
+        return false;
+      default:
+        return false;
+    }
+  };
+
   return (
     <div className={classNames(styles.formButtonControls)}>
       <div className={classNames(styles.formButtons)}>
         <Button
           loading={loading}
-          disabled={statusForm !== 'idle'}
+          disabled={!canHandleSubmit() || !isValid}
           onClick={(event) => {
             onSubmit(event);
             changeStatusForm(errorFields.length > 0 ? 'error' : 'success');

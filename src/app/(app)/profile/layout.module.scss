@@ -4,13 +4,9 @@
 }
 
 .profileLayoutContent {
-  overflow-x: auto;
-
   width: 100%;
 
   height: calc(100% - sizes.$horizontalMenuHeight);
 
   background-color: colors.$backgroundColorWidgetItem;
-
-  @include mixins.scrollbar;
 }

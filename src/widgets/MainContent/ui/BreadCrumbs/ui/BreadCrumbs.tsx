@@ -26,10 +26,14 @@ export const BreadCrumbs: FC = () => {
             tabIndex={0}
             data-testid={`breadcrumbs-item-${index}`}
             onMouseEnter={() => {
-              setPathToRedirect(splittedPaths.slice(0, index + 1).join('/'));
+              setPathToRedirect(
+                '/' + splittedPaths.slice(0, index + 1).join('/'),
+              );
             }}
             onFocus={() => {
-              setPathToRedirect(splittedPaths.slice(0, index + 1).join('/'));
+              setPathToRedirect(
+                '/' + splittedPaths.slice(0, index + 1).join('/'),
+              );
             }}
           >
             <Typography>{splittedPath}</Typography>

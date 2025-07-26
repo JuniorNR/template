@@ -8,6 +8,7 @@ export interface FormProps extends ComponentPropsWithoutRef<'form'> {
   onSubmit: (event: React.SyntheticEvent) => void;
   errors?: FieldErrors;
   loading?: boolean;
+  isValid?: boolean;
 }
 
-export type FormStatuses = 'idle' | 'success' | 'error';
+export type FormStatuses = 'idle' | 'success' | 'error' | 'noValid';

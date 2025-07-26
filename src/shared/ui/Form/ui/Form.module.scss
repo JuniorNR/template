@@ -1,9 +1,9 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: sizes.rem(10);
 
   border: 2px solid colors.$accentColor;
+  gap: sizes.rem(10);
 
   &.error {
     border: 2px solid colors.$errorColor;

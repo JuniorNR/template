@@ -23,6 +23,7 @@ export const TextField: FC<TextFieldProps> = ({
   helperText,
   status = TextFieldStatuses.DEFAULT,
   type,
+  autocomplete,
   disabled = false,
   editable = true,
 }) => {
@@ -57,7 +58,7 @@ export const TextField: FC<TextFieldProps> = ({
               [styles.success]: status === TextFieldStatuses.SUCCESS,
               [styles.info]: status === TextFieldStatuses.INFO,
             })}
-            autoComplete='off'
+            autoComplete={autocomplete}
             name={name}
             type={type}
             placeholder={placeholder}
@@ -74,6 +75,7 @@ export const TextField: FC<TextFieldProps> = ({
             <input
               ref={inputRef}
               className={classNames(styles.input, { ...stylesByStatus })}
+              autoComplete={autocomplete}
               type={passwordShow ? 'text' : type}
               placeholder={placeholder}
               value={value}

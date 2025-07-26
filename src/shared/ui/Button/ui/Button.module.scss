@@ -8,7 +8,7 @@
 
   cursor: pointer;
 
-  color: colors.$textColorReverse;
+  color: colors.$textColor3;
 
   border: none;
   border-radius: 0;
@@ -48,14 +48,14 @@
 
   &:hover, &:focus {
     color: colors.$accentColor;
-    background-color: colors.$accentColorActive;
+    background-color: colors.$accentColor2;
   }
 
   &:disabled {
     cursor: default;
 
-    color: colors.$disabledTextColor;;
-    background-color: colors.$disabledBackground;
+    color: colors.$disabledTextColor;
+    background-color: colors.$disabledBackgroundColor2;
 
     font-weight: 500;
   }

@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
 import { classNames } from '@/helpers';
 

@@ -17,13 +17,13 @@
 
   transition: transitions.$fast;
 
-  color: colors.$breadcrumbTextColor;
+  color: colors.$textColor3;
 
-  background-color: colors.$breadcrumbColor;
+  background-color: colors.$accentColor;
 
   &:focus {
-    color: colors.$breadcrumbFocusTextColor;
-    background-color: colors.$breadcrumbFocusColor;
+    color: colors.$accentColor;
+    background-color: colors.$accentColor2;
   }
 
   &:only-child {
@@ -31,8 +31,8 @@
   }
 
   &:last-child {
-    color: colors.$breadcrumbHoverTextColor;
-    background-color: colors.$breadcrumbHoverColor;
+    color: colors.$accentColor;
+    background-color: colors.$accentColor2;
   }
 
   &:first-child {
@@ -61,8 +61,8 @@
     cursor: pointer;
     
     &:hover {
-      color: colors.$breadcrumbHoverTextColor;
-      background-color: colors.$breadcrumbHoverColor;
+      color: colors.$accentColor;
+      background-color: colors.$accentColor2;
     }
   }
 }

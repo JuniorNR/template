@@ -2,7 +2,9 @@ import type { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 
+import type { UserDTO } from '@/entities/types';
 import { Form, TextField } from '@/shared';
+import { handleFetch } from '@/shared/lib';
 
 import { publicInformationFormSchema } from '../model/schemas/PublicInformationForm.schema';
 
@@ -11,7 +13,7 @@ import type { FormValues } from '../model/schemas/PublicInformationForm.schema';
 export const PublicInformationForm: FC = () => {
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     control,
   } = useForm<FormValues>({
     resolver: zodResolver(publicInformationFormSchema),
@@ -24,13 +26,24 @@ export const PublicInformationForm: FC = () => {
   });
 
   const onSubmit = handleSubmit((data: FormValues) => {
-    console.debug(data, 'data');
+    handleFetch<
+      Pick<UserDTO, 'id' | 'first_name' | 'last_name' | 'middle_name'>
+    >('/user/update-public-fields', {
+      method: 'PATCH',
+      data: {
+        id: 1,
+        first_name: data.firstName,
+        middle_name: data.middleName,
+        last_name: data.lastName,
+      },
+    });
   });
   return (
     <Form
       title='Public information'
       loading={isSubmitting}
       errors={errors}
+      isValid={isValid}
       onSubmit={onSubmit}
     >
       <Controller

@@ -21,7 +21,7 @@
     padding: sizes.rem(10);
 
     &:focus {
-      border: 2px solid colors.$focusColor;
+      border: 2px solid colors.$accentColor;
     }
 
     & > svg {
@@ -45,14 +45,14 @@
     background-color: colors.$accentColor;
 
     &:not(.active) h3, &:not(.active) svg {
-      color: colors.$accentColorReverse;
+      color: colors.$accentColor3;
     }
   }
 
   &.active {
     flex-grow: 1;
 
-    background-color: colors.$accentColorActive;
+    background-color: colors.$accentColor2;
   }
 
   &:not(.active) {
@@ -64,7 +64,7 @@
 
     cursor: default;
 
-    background-color: colors.$disabledBackground;
+    background-color: colors.$disabledBackgroundColor2;
 
     &:not(.active) h3, &:not(.active) svg, &:hover h3, &:hover svg  {
       color: colors.$disabledTextColor;

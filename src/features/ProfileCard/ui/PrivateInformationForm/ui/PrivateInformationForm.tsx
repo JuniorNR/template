@@ -13,7 +13,7 @@ import type { FormValues } from '../model/schemas/PrivateInformationForm.schema'
 export const PrivateInformationForm: FC = () => {
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     control,
   } = useForm<FormValues>({
     resolver: zodResolver(privateInformationFormSchema),
@@ -28,7 +28,7 @@ export const PrivateInformationForm: FC = () => {
     handleFetch<Pick<UserDTO, 'id' | 'email' | 'login'>>(
       '/user/update-private-fields',
       {
-        method: 'POST',
+        method: 'PATCH',
         data: {
           id: 1,
           email: dataToServer.email,
@@ -43,6 +43,7 @@ export const PrivateInformationForm: FC = () => {
       title='Private information'
       loading={isSubmitting}
       errors={errors}
+      isValid={isValid}
       onSubmit={onSubmit}
     >
       <Controller
