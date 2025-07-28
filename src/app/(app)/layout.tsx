@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Noto_Sans as notoSansFont } from 'next/font/google';
 
+import { AuthMiddleware } from '@/config/middlewares';
 import theme from '@/config/styles/theme/theme';
 import { StoreProvider } from '@/providers';
 import { classNames } from '@/shared/lib';
@@ -33,12 +34,14 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
-            <StoreProvider>
-              <div className={classNames(styles.rootLayout)}>
-                <Sidebar sidebarList={sidebarList} />
-                <MainContent>{children}</MainContent>
-              </div>
-            </StoreProvider>
+            <AuthMiddleware>
+              <StoreProvider>
+                <div className={classNames(styles.rootLayout)}>
+                  <Sidebar sidebarList={sidebarList} />
+                  <MainContent>{children}</MainContent>
+                </div>
+              </StoreProvider>
+            </AuthMiddleware>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
