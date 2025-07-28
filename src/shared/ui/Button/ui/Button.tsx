@@ -17,6 +17,7 @@ export const Button: FC<ButtonProps> = ({
   loading = false,
   fullWidth = false,
   disabled,
+  onClick,
   ...props
 }) => {
   const preparedStylesByProps = {
@@ -43,6 +44,10 @@ export const Button: FC<ButtonProps> = ({
       tabIndex={0}
       type='button'
       disabled={disabled || loading}
+      onClick={(event) => {
+        event.preventDefault();
+        onClick?.(event);
+      }}
       {...props}
     >
       {iconStart ?? null}

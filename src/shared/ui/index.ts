@@ -4,3 +4,4 @@ export * from './Typography';
 export * from './TextField';
 export * from './Form';
 export * from './Loader';
+export * from './Question';

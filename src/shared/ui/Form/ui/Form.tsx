@@ -14,6 +14,7 @@ export const Form: FC<FormProps> = ({
   children,
   title,
   onSubmit,
+  errorFields = true,
   loading,
   errors,
   isValid,
@@ -44,6 +45,7 @@ export const Form: FC<FormProps> = ({
         titleSubmitButton={titleSubmitButton}
         statusForm={statusForm}
         loading={loading}
+        errorFields={errorFields}
         errors={errors}
         isValid={isValid}
         changeStatusForm={handleChangeStatusForm}

@@ -12,6 +12,7 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
   loading,
   errors,
   statusForm,
+  errorFields,
   changeStatusForm,
   isValid,
   titleSubmitButton,
@@ -19,7 +20,7 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const holdStatusMS = 3000;
 
-  const errorFields = Object.keys(errors || []).map((error) => {
+  const errorFieldsText = Object.keys(errors || []).map((error) => {
     let field = '';
     const splittedField: string | string[] = error
       .split(/[_]+|(?=[A-Z])/) // split by underscore or capital letter
@@ -72,7 +73,7 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
           disabled={!canHandleSubmit() || !isValid}
           onClick={(event) => {
             onSubmit(event);
-            changeStatusForm(errorFields.length > 0 ? 'error' : 'success');
+            changeStatusForm(errorFieldsText.length > 0 ? 'error' : 'success');
 
             timerRef.current = setTimeout(() => {
               changeStatusForm('idle');
@@ -82,17 +83,19 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
           {renderTextButtonByStatusForm()}
         </Button>
       </div>
-      <div className={classNames(styles.formInfo)}>
-        <TextField
-          type='text'
-          label='Error fields'
-          editable={false}
-          status={errorFields.length > 0 ? 'info' : 'success'}
-          disabled={errorFields.length === 0}
-          value={errorFields.join(', ')}
-          cutText
-        />
-      </div>
+      {errorFields ?
+        <div className={classNames(styles.formInfo)}>
+          <TextField
+            type='text'
+            label='Error fields'
+            editable={false}
+            status={errorFieldsText.length > 0 ? 'info' : 'success'}
+            disabled={errorFieldsText.length === 0}
+            value={errorFieldsText.join(', ')}
+            cutText
+          />
+        </div>
+      : null}
     </div>
   );
 };

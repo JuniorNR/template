@@ -1,0 +1,43 @@
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: sizes.rem(10);
+
+  border: 2px solid colors.$accentColor;
+
+  & .title {
+    width: fit-content;
+    padding: 0 sizes.rem(25) 0 sizes.rem(5);
+
+    color: colors.$textColor3;
+
+    background-color: colors.$accentColor;
+
+    font-size: sizes.$text24;
+    font-weight: 600;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, calc(100% - sizes.rem(25)) 100%, 0 100%);
+  }
+
+  & .description {
+    font-size: sizes.$text18;
+  }
+
+  & .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: sizes.rem(10);
+
+    & button {
+      justify-content: center;
+
+      width: 100%;
+
+      text-align: center;
+    }
+  }
+
+  & .description,
+  & .buttons {
+    padding: 0 sizes.rem(10) sizes.rem(10) sizes.rem(10);
+  }
+}
