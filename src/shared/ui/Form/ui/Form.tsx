@@ -17,6 +17,7 @@ export const Form: FC<FormProps> = ({
   loading,
   errors,
   isValid,
+  titleSubmitButton,
   ...props
 }) => {
   const [statusForm, setStatusForm] = useState<FormStatuses>('idle');
@@ -40,6 +41,7 @@ export const Form: FC<FormProps> = ({
       />
       <div className={classNames(styles.formContent)}>{children}</div>
       <FormButtonControls
+        titleSubmitButton={titleSubmitButton}
         statusForm={statusForm}
         loading={loading}
         errors={errors}

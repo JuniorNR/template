@@ -5,6 +5,7 @@ export interface FormButtonControlsProps {
   onSubmit: (event: React.SyntheticEvent) => void;
   statusForm: FormStatuses;
   changeStatusForm: (status: FormStatuses) => void;
+  titleSubmitButton?: string;
   errors?: FieldErrors;
   loading?: boolean;
   isValid?: boolean;

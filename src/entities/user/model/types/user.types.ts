@@ -14,5 +14,6 @@ export interface UserDTO {
   last_name: string;
   email: string;
   login: string;
+  token?: string;
   password?: string;
 }

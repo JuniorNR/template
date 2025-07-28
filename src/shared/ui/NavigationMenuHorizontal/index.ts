@@ -1,2 +1,2 @@
 export { NavigationMenuHorizontal } from './ui/NavigationMenuHorizontal';
-export type { NavigationMenuHorizontalItem } from './model/types/NavigationMenuHorizontal.types';
+export type { NavigationMenuHorizontalProps } from './model/types/NavigationMenuHorizontal.types';

@@ -1,2 +1,3 @@
 export * from './Rating';
-export * from './ProfileCard';
+export * from './Profile';
+export * from './Auth';

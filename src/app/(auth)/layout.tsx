@@ -6,6 +6,8 @@ import { Noto_Sans as notoSansFont } from 'next/font/google';
 import theme from '@/config/styles/theme/theme';
 import { StoreProvider } from '@/providers';
 
+import styles from './layout.module.scss';
+
 import type { Metadata } from 'next';
 
 const notoSans = notoSansFont({
@@ -30,10 +32,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <StoreProvider>
-              <div>
-                auth layout
-                {children}
-              </div>
+              <div className={styles.layout}>{children}</div>
             </StoreProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>

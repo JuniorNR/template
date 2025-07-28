@@ -14,15 +14,21 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
   statusForm,
   changeStatusForm,
   isValid,
+  titleSubmitButton,
 }) => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const holdStatusMS = 3000;
+
   const errorFields = Object.keys(errors || []).map((error) => {
-    const capitalizedError = error.charAt(0).toUpperCase() + error.slice(1);
-    let field: string | string[] = capitalizedError.split('_');
-    if (field.length > 1) {
-      field = field.join(' ');
-    }
+    let field = '';
+    const splittedField: string | string[] = error
+      .split(/[_]+|(?=[A-Z])/) // split by underscore or capital letter
+      .filter(Boolean);
+    const capitalizedField = splittedField.map((item) => {
+      return item[0].toUpperCase() + item.slice(1);
+    });
+
+    field = capitalizedField.join(' ');
     return field;
   });
 
@@ -41,7 +47,7 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
       case 'error':
         return 'Error';
       default:
-        return 'Save';
+        return titleSubmitButton || 'Submit';
     }
   };
 
@@ -84,6 +90,7 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
           status={errorFields.length > 0 ? 'info' : 'success'}
           disabled={errorFields.length === 0}
           value={errorFields.join(', ')}
+          cutText
         />
       </div>
     </div>

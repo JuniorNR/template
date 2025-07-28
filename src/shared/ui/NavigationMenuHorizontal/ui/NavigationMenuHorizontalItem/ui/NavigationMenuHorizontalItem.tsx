@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, type FC } from 'react';
 
 import { Typography } from '@/shared';
@@ -11,12 +12,14 @@ import type { NavigationMenuHorizontalItemProps } from '../model/types/Navigatio
 export const NavigationMenuHorizontalItem: FC<
   NavigationMenuHorizontalItemProps
 > = ({ icon, title, url, notifications, disabled, path }) => {
+  const router = useRouter();
   const [hovered, setHovered] = useState<boolean>(false);
   const isActive = url === path;
   const isDisabled = disabled ?? false;
   const lengthByHover = hovered ? 0 : 10;
   // TODO: Дописать компонент badge
   // TODO: Дописать тесты
+
   const renderLink = () => {
     if (!isActive && !isDisabled) {
       return (

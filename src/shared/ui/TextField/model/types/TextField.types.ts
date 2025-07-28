@@ -11,4 +11,5 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   helperText?: string;
   status?: 'error' | 'success' | 'info' | 'attention' | 'default';
   editable?: boolean;
+  cutText?: boolean;
 }

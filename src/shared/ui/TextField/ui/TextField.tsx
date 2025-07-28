@@ -17,15 +17,16 @@ import type { TextFieldProps } from '../model/types/TextField.types';
 export const TextField: FC<TextFieldProps> = ({
   label,
   name,
-  placeholder,
+  placeholder = 'Enter...',
   onChange,
-  value,
+  value = '',
   helperText,
   status = TextFieldStatuses.DEFAULT,
   type,
   autocomplete,
   disabled = false,
   editable = true,
+  cutText = false,
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [focused, setFocused] = useState<boolean>(false);
@@ -98,6 +99,7 @@ export const TextField: FC<TextFieldProps> = ({
           [styles.error]: status === TextFieldStatuses.ERROR,
           [styles.success]: status === TextFieldStatuses.SUCCESS,
           [styles.info]: status === TextFieldStatuses.INFO,
+          [styles.cutText]: cutText,
         })}
         tabIndex={0}
       >

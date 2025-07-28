@@ -1,15 +1,19 @@
+/* eslint-disable fsd-import/layer-imports */
+/* eslint-disable complexity */
 /* eslint-disable no-console */
+
+import { localStorageAuth } from '@/entities';
 
 type UseFetchOptions = RequestInit & {
   skip?: boolean;
 };
 
-export const handleFetch = async <T>(
+export const handleFetch = async <TRequest, TResponse>(
   url: string,
   options?: UseFetchOptions & {
-    data: Partial<T>;
+    data?: Partial<TRequest>;
   },
-) => {
+): Promise<TResponse> => {
   try {
     const fullUrl =
       url.startsWith('/') ?
@@ -19,6 +23,10 @@ export const handleFetch = async <T>(
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization:
+        localStorageAuth.getToken() ?
+          `Bearer ${localStorageAuth.getToken()}`
+        : '',
       ...options?.headers,
     };
 
@@ -45,11 +53,12 @@ export const handleFetch = async <T>(
     const contentType = response.headers.get('content-type');
     const result =
       contentType?.includes('application/json') ?
-        ((await response.json()) as T)
-      : ((await response.text()) as T);
+        ((await response.json()) as TResponse)
+      : ((await response.text()) as TResponse);
 
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

@@ -1,8 +1,8 @@
-export interface NavigationMenuHorizontalItemProps {
+export type NavigationMenuHorizontalItemProps = {
   icon: React.ReactNode;
   title: string;
-  url: string;
   notifications: number;
-  path: string;
+  url: string;
   disabled?: boolean;
-}
+  path?: string;
+};

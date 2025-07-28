@@ -1,13 +1,20 @@
+'use client';
+
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import InfoIcon from '@mui/icons-material/Info';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 
-import type { NavigationMenuHorizontalItem } from '@/shared';
+import type { NavigationMenuHorizontalProps } from '@/shared';
 
 import { AppRoutesProfile } from './appRouter.utils';
+import { ApiRoutes } from '../api';
+import { handleFetch } from '../helpers';
 
-export const ProfileLinkList: NavigationMenuHorizontalItem[] = [
+export const ProfileLinkList: Omit<
+  NavigationMenuHorizontalProps['items'],
+  'path'
+> = [
   {
     icon: <InfoIcon />,
     title: 'Info',
@@ -30,7 +37,6 @@ export const ProfileLinkList: NavigationMenuHorizontalItem[] = [
     icon: <ExitToAppIcon />,
     title: 'Log out',
     notifications: 1532,
-    url: AppRoutesProfile.LOG_OUT,
-    disabled: true,
+    url: AppRoutesProfile.LOGOUT,
   },
 ];
