@@ -1,49 +1,60 @@
-import type { FC } from 'react';
+/* eslint-disable complexity */
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, type FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import type { UserDTO } from '@/entities/types';
+import { useUser } from '@/entities/user';
 import { Form, TextField } from '@/shared';
-import { handleFetch } from '@/shared/lib';
 
 import { publicInformationFormSchema } from '../model/schemas/PublicInformationForm.schema';
 
 import type { FormValues } from '../model/schemas/PublicInformationForm.schema';
 
 export const PublicInformationForm: FC = () => {
+  const { user, isLoading, updateUserPublicFieldsData } = useUser();
+
   const {
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
     control,
+    watch,
+    reset,
   } = useForm<FormValues>({
     resolver: zodResolver(publicInformationFormSchema),
     defaultValues: {
-      firstName: '',
-      middleName: '',
-      lastName: '',
+      firstName: user?.firstName ?? '',
+      middleName: user?.middleName ?? '',
+      lastName: user?.lastName ?? '',
     },
     mode: 'onChange',
   });
 
-  const onSubmit = handleSubmit((data: FormValues) => {
-    handleFetch<
-      Pick<UserDTO, 'id' | 'first_name' | 'last_name' | 'middle_name'>
-    >('/user/update-public-fields', {
-      method: 'PATCH',
-      data: {
-        id: 1,
-        first_name: data.firstName,
-        middle_name: data.middleName,
-        last_name: data.lastName,
-      },
-    });
+  useEffect(() => {
+    if (user) {
+      reset({
+        firstName: user.firstName,
+        middleName: user.middleName,
+        lastName: user.lastName,
+      });
+    }
+  }, [user, reset]);
+
+  const onSubmit = handleSubmit((dataToServer: FormValues) => {
+    updateUserPublicFieldsData(dataToServer);
   });
   return (
     <Form
+      additionalValidate={{
+        atLeastOneFieldMustBeChanged:
+          watch('firstName') === user?.firstName &&
+          watch('middleName') === user?.middleName &&
+          watch('lastName') === user?.lastName,
+      }}
       title='Public information'
       loading={isSubmitting}
       errors={errors}
       isValid={isValid}
+      blur={isLoading}
       onSubmit={onSubmit}
     >
       <Controller

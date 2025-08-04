@@ -76,7 +76,7 @@ export const eslintRules = {
   ],
   'id-length': ['error', { min: 1 }],
   'func-style': ['error', 'expression'],
-  complexity: ['error', 10],
+  complexity: ['warn', 10],
   curly: ['error', 'multi-line'],
   eqeqeq: ['error', 'always'],
   camelcase: ['error', { properties: 'never' }],

@@ -14,6 +14,8 @@ export const Form: FC<FormProps> = ({
   children,
   title,
   onSubmit,
+  additionalValidate,
+  blur = false,
   errorFields = true,
   loading,
   errors,
@@ -26,12 +28,33 @@ export const Form: FC<FormProps> = ({
   const handleChangeStatusForm = (statusForm: FormStatuses) => {
     setStatusForm(statusForm);
   };
+
+  const additionalValidatingFields = Object.entries(additionalValidate || {})
+    .map((error) => {
+      if (error[1]) {
+        let field = '';
+
+        const splittedField: string | string[] = error[0]
+          .split(/[_]+|(?=[A-Z])/) // split by underscore or capital letter
+          .filter(Boolean);
+        const capitalizedField = splittedField.map((item) => {
+          return item[0].toUpperCase() + item.slice(1);
+        });
+
+        field = capitalizedField.join(' ');
+        return field;
+      }
+      return null;
+    })
+    .filter((field): field is string => field !== null); // Убираем null значения и типизируем
+
   return (
     <form
       className={classNames(styles.form, {
         [styles.success]: statusForm === 'success',
         [styles.error]: statusForm === 'error',
         [styles.noValid]: statusForm === 'noValid',
+        [styles.blur]: blur,
       })}
       {...props}
     >
@@ -45,6 +68,7 @@ export const Form: FC<FormProps> = ({
         titleSubmitButton={titleSubmitButton}
         statusForm={statusForm}
         loading={loading}
+        additionalValidatingFields={additionalValidatingFields}
         errorFields={errorFields}
         errors={errors}
         isValid={isValid}

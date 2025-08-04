@@ -2,39 +2,42 @@ import type { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 
-import type { UserDTO } from '@/entities/types';
+import { useUser } from '@/entities/user';
 import { Form, TextField } from '@/shared';
-import { handleFetch } from '@/shared/lib';
 
 import { passwordChangeFormSchema } from '../model/schemas/passwordChangeForm.schema';
 
 import type { FormValues } from '../model/schemas/passwordChangeForm.schema';
 
 export const PasswordChangeForm: FC = () => {
+  const { updateUserPasswordData, isLoading } = useUser();
   const {
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
     control,
+    watch,
   } = useForm<FormValues>({
     resolver: zodResolver(passwordChangeFormSchema),
     defaultValues: {
       password: '',
-      confirm_password: '',
+      password_confirmation: '',
     },
     mode: 'onChange',
   });
-  const onSubmit = handleSubmit((data: FormValues) => {
-    handleFetch<Pick<UserDTO, 'id'> & { password: string }>(
-      '/user/update-password',
-      {
-        method: 'PATCH',
-        data: { id: 1, password: data.password },
-      },
-    );
+
+  const onSubmit = handleSubmit((dataToServer: FormValues) => {
+    updateUserPasswordData(dataToServer);
   });
   return (
     <Form
+      additionalValidate={{
+        passwordsDoNotMatch:
+          watch('password') !== watch('password_confirmation'),
+        fieldsShouldNotBeEmpty:
+          watch('password') === '' || watch('password_confirmation') === '',
+      }}
       title='Password change'
+      blur={isLoading}
       loading={isSubmitting}
       errors={errors}
       isValid={isValid}
@@ -73,7 +76,7 @@ export const PasswordChangeForm: FC = () => {
             />
           );
         }}
-        name='confirm_password'
+        name='password_confirmation'
         control={control}
       />
     </Form>

@@ -5,6 +5,7 @@ const nameLengthMax = 20;
 const passwordLengthMin = 8;
 
 export const registrationFormSchema = z.object({
+  login: z.string().min(5, 'Login must be at least 5 characters long'),
   firstName: z
     .string()
     .min(

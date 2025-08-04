@@ -1,22 +1,23 @@
-/* eslint-disable complexity */
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+
+import { handleFetch } from '../../helpers';
 
 type UseFetchOptions = RequestInit & {
   skip?: boolean;
 };
 
-export const useFetch = <T = object>(
+export const useFetch = <TRequest = object, TResponse = object>(
   url: string,
   options?: UseFetchOptions & {
-    data: Partial<T>;
+    data?: Partial<TRequest>;
   },
-) => {
-  const [dataFromServer, setDataFromServer] = useState<T | null>(null);
+): { data: TResponse | null; loading: boolean; error: Error | null } => {
+  const [dataFromServer, setDataFromServer] = useState<TResponse | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [retryCount, setRetryCount] = useState(0);
 
   const fetchData = useCallback(async () => {
     if (options?.skip) return null;
@@ -24,42 +25,11 @@ export const useFetch = <T = object>(
       setLoading(true);
       setError(null);
 
-      const fullUrl =
-        url.startsWith('/') ?
-          `${process.env.NEXT_PUBLIC_API_URL}${url}`
-        : `${process.env.NEXT_PUBLIC_API_URL}/${url}`;
-
-      const response = await fetch(fullUrl, {
-        ...options,
-        body: JSON.stringify(options?.data),
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          ...options?.headers,
-        },
-      });
-
-      if (!response.ok) {
-        let errorBody;
-        try {
-          errorBody = await response.json();
-        } catch {
-          errorBody = { message: `HTTP error! Status: ${response.status}` };
-        }
-
-        throw new Error(
-          errorBody.message || `HTTP error! Status: ${response.status}`,
-        );
-      }
-
-      const contentType = response.headers.get('content-type');
-      const result =
-        contentType?.includes('application/json') ?
-          ((await response.json()) as T)
-        : ((await response.text()) as T);
-
-      setDataFromServer(result);
+      const response = await handleFetch<TRequest, { data: TResponse }>(
+        url,
+        options,
+      );
+      setDataFromServer(response.data as TResponse);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error);
@@ -67,15 +37,11 @@ export const useFetch = <T = object>(
     } finally {
       setLoading(false);
     }
-  }, [url, JSON.stringify(options), options?.skip, retryCount]);
+  }, [options, url]);
 
   useEffect(() => {
     fetchData();
-  }, [fetchData, retryCount]);
+  }, [url, options?.method, options?.skip, options?.data]);
 
-  const refetch = () => {
-    setRetryCount((prev) => prev + 1);
-  };
-
-  return { dataFromServer, loading, error, refetch, retryCount };
+  return { data: dataFromServer || null, loading, error };
 };

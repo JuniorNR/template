@@ -13,10 +13,13 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
   errors,
   statusForm,
   errorFields,
+  additionalValidatingFields,
   changeStatusForm,
   isValid,
   titleSubmitButton,
 }) => {
+  const additionalValidatingNotEmpty =
+    additionalValidatingFields[0]?.length > 0;
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const holdStatusMS = 3000;
 
@@ -69,8 +72,10 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
     <div className={classNames(styles.formButtonControls)}>
       <div className={classNames(styles.formButtons)}>
         <Button
+          disabled={
+            !canHandleSubmit() || !isValid || additionalValidatingNotEmpty
+          }
           loading={loading}
-          disabled={!canHandleSubmit() || !isValid}
           onClick={(event) => {
             onSubmit(event);
             changeStatusForm(errorFieldsText.length > 0 ? 'error' : 'success');
@@ -86,12 +91,19 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
       {errorFields ?
         <div className={classNames(styles.formInfo)}>
           <TextField
+            value={
+              errorFieldsText.join(', ') ||
+              additionalValidatingFields.join(', ')
+            }
+            status={
+              errorFieldsText.length > 0 || additionalValidatingNotEmpty ?
+                'info'
+              : 'success'
+            }
             type='text'
             label='Error fields'
             editable={false}
-            status={errorFieldsText.length > 0 ? 'info' : 'success'}
             disabled={errorFieldsText.length === 0}
-            value={errorFieldsText.join(', ')}
             cutText
           />
         </div>

@@ -6,6 +6,8 @@ export interface FormProps extends ComponentPropsWithoutRef<'form'> {
   children: React.ReactNode | React.ReactNode[];
   title: string;
   onSubmit: (event: React.SyntheticEvent) => void;
+  blur?: boolean;
+  additionalValidate?: Record<string, boolean>;
   errorFields?: boolean;
   titleSubmitButton?: string;
   errors?: FieldErrors;

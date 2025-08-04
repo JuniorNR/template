@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 
-import { localStorageAuth } from '@/entities';
+import { localStorageAuth, useUser } from '@/entities';
 import type { UserDTO } from '@/entities/types';
 import { Form, TextField } from '@/shared';
 import { ApiRoutes, handleFetch } from '@/shared/lib';
@@ -16,6 +16,7 @@ import type { FormValues } from '../model/schemas/LoginForm.schema';
 
 export const LoginForm: FC = () => {
   const router = useRouter();
+  const { loginUserData } = useUser();
   const {
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
@@ -23,21 +24,15 @@ export const LoginForm: FC = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(loginFormSchema),
     mode: 'onChange',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
   const onSubmit = handleSubmit(async (dataToServer: FormValues) => {
-    const { data } = await handleFetch<UserDTO, { data: UserDTO }>(
-      ApiRoutes.LOGIN,
-      {
-        method: 'POST',
-        data: {
-          email: dataToServer.email,
-          password: dataToServer.password,
-        },
-      },
-    );
+    const data = await loginUserData(dataToServer);
 
-    if (data.token) {
-      localStorageAuth.saveToken(data.token);
+    if (data && localStorageAuth.getToken()) {
       router.push('/');
     }
   });

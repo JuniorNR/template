@@ -3,10 +3,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 
-import { localStorageAuth } from '@/entities';
-import type { UserDTO } from '@/entities/types';
+import { localStorageAuth, useUser } from '@/entities';
 import { Form, TextField } from '@/shared';
-import { ApiRoutes, classNames, handleFetch } from '@/shared/lib';
+import { classNames } from '@/shared/lib';
 
 import {
   registrationFormSchema,
@@ -17,6 +16,7 @@ import styles from './RegistrationForm.module.scss';
 
 export const RegistrationForm: FC = () => {
   const router = useRouter();
+  const { registerUserData } = useUser();
   const {
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
@@ -24,6 +24,7 @@ export const RegistrationForm: FC = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(registrationFormSchema),
     defaultValues: {
+      login: '',
       firstName: '',
       middleName: '',
       lastName: '',
@@ -34,22 +35,8 @@ export const RegistrationForm: FC = () => {
     mode: 'onChange',
   });
   const onSubmit = handleSubmit(async (dataToServer: FormValues) => {
-    const { data } = await handleFetch<
-      UserDTO,
-      { data: UserDTO; token: string }
-    >(ApiRoutes.REGISTRATION, {
-      method: 'POST',
-      data: {
-        first_name: dataToServer.firstName,
-        middle_name: dataToServer.middleName,
-        last_name: dataToServer.lastName,
-        email: dataToServer.email,
-        login: dataToServer.email,
-        password: dataToServer.password,
-      },
-    });
-    if (data.token) {
-      localStorageAuth.saveToken(data.token);
+    const data = await registerUserData(dataToServer);
+    if (data && localStorageAuth.getToken()) {
       router.push('/');
     }
   });
@@ -64,6 +51,22 @@ export const RegistrationForm: FC = () => {
         errors={errors}
         onSubmit={onSubmit}
       >
+        <Controller
+          render={({ field, fieldState }) => {
+            return (
+              <TextField
+                type='text'
+                label='Login'
+                placeholder='Enter...'
+                status={fieldState.error ? 'error' : undefined}
+                helperText={fieldState.error?.message}
+                {...field}
+              />
+            );
+          }}
+          name='login'
+          control={control}
+        />
         <Controller
           render={({ field, fieldState }) => {
             return (

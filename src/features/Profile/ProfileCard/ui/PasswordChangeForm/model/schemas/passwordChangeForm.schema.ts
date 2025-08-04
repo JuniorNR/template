@@ -14,7 +14,7 @@ export const passwordChangeFormSchema = z.object({
       passwordLengthMax,
       `The password must not exceed ${passwordLengthMax} characters`,
     ),
-  confirm_password: z
+  password_confirmation: z
     .string()
     .min(
       passwordLengthMin,
