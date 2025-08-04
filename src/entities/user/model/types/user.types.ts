@@ -29,15 +29,10 @@ export type UserPasswordFields = {
 };
 
 // Типы для регистрации
-export type RegisterUserData = Omit<User, 'id'> & UserPasswordFields;
+export type RegisterRequest = Omit<User, 'id'> & UserPasswordFields;
 
 // Типы для авторизации
 export interface LoginRequest {
   email: string;
   password: string;
-}
-
-export interface AuthResponse {
-  user: UserDTO;
-  token: string;
 }

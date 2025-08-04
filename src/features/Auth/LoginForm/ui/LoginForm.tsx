@@ -3,10 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 
-import { localStorageAuth, useUser } from '@/entities';
-import type { UserDTO } from '@/entities/types';
+import { localStorageAuth, useAuth } from '@/entities';
 import { Form, TextField } from '@/shared';
-import { ApiRoutes, handleFetch } from '@/shared/lib';
 
 import { loginFormSchema } from '../model/schemas/LoginForm.schema';
 
@@ -16,7 +14,7 @@ import type { FormValues } from '../model/schemas/LoginForm.schema';
 
 export const LoginForm: FC = () => {
   const router = useRouter();
-  const { loginUserData } = useUser();
+  const { loginUserData } = useAuth();
   const {
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
@@ -33,7 +31,8 @@ export const LoginForm: FC = () => {
     const data = await loginUserData(dataToServer);
 
     if (data && localStorageAuth.getToken()) {
-      router.push('/');
+      // router.push('/');
+      router.replace('/', { scroll: false });
     }
   });
 

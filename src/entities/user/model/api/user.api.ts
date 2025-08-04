@@ -4,15 +4,11 @@ import { baseQuery } from '@/api';
 import { dto } from '@/shared/lib';
 import type { ApiResponse } from '@/types';
 
-import { localStorageAuth } from '../lib/localStorageAuth';
-
 import type {
   User,
   UserDTO,
   UserPrivateFields,
   UserPublicFields,
-  RegisterUserData,
-  LoginRequest,
 } from '../types';
 
 export const userApi = createApi({
@@ -20,54 +16,6 @@ export const userApi = createApi({
   baseQuery,
   tagTypes: ['User'],
   endpoints: (builder) => ({
-    registerUser: builder.mutation<
-      { user: User; token: string },
-      RegisterUserData
-    >({
-      query: (userData) => ({
-        url: '/register',
-        method: 'POST',
-        body: dto<RegisterUserData, UserDTO>('toServer', userData),
-      }),
-      transformResponse: (
-        response: ApiResponse<{ user: UserDTO; token: string }>,
-      ) => {
-        const user = dto<UserDTO, User>('toClient', response.data.user);
-        const token = response.data.token;
-        return {
-          user,
-          token,
-        };
-      },
-    }),
-    loginUser: builder.mutation<{ user: User; token: string }, LoginRequest>({
-      query: (loginData) => ({
-        url: '/login',
-        method: 'POST',
-        body: dto<LoginRequest, UserDTO>('toServer', loginData),
-      }),
-      transformResponse: (
-        response: ApiResponse<{ user: UserDTO; token: string }>,
-      ) => {
-        const user = dto<UserDTO, User>('toClient', response.data.user);
-        const token = response.data.token;
-        return {
-          user,
-          token,
-        };
-      },
-      invalidatesTags: ['User'],
-    }),
-    logoutUser: builder.mutation<ApiResponse<UserDTO>, void>({
-      query: () => ({
-        url: '/user/logout',
-        method: 'POST',
-      }),
-      transformResponse: (response: ApiResponse<UserDTO>) => {
-        return response;
-      },
-      invalidatesTags: ['User'],
-    }),
     getUser: builder.query<User, void>({
       query: () => '/user',
       transformResponse: (response: ApiResponse<UserDTO>) => {
@@ -115,9 +63,6 @@ export const userApi = createApi({
 
 export const {
   useGetUserQuery,
-  useRegisterUserMutation,
-  useLoginUserMutation,
-  useLogoutUserMutation,
   useUpdatePublicFieldsMutation,
   useUpdatePrivateFieldsMutation,
   useUpdatePasswordMutation,

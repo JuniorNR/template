@@ -1,18 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
-import { userApi } from '@/entities/user';
+import { authApi, userApi } from '@/entities';
 
 import type { AppStore } from './types/store.types';
 
 export const makeStore = () => {
   const rootReducer = {
     [userApi.reducerPath]: userApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
   };
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(userApi.middleware),
+      getDefaultMiddleware().concat(userApi.middleware, authApi.middleware),
     devTools: process.env.NODE_ENV !== 'production',
   });
 };

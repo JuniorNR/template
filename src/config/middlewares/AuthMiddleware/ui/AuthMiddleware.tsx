@@ -1,10 +1,10 @@
 'use client';
+/* eslint-disable no-console */
 
 import type { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { localStorageAuth } from '@/entities';
 import { Loader } from '@/shared/ui';
 
 import { checkAuthStatus } from '../lib/authUtils';
@@ -42,7 +42,7 @@ export const AuthMiddleware: FC<{ children: React.ReactNode }> = ({
     );
   }
 
-  // Если не аутентифицирован, не рендерим children
+  // Если не аутентифицирован, не render children
   if (!isAuthenticated) {
     return null;
   }

@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 
-import { localStorageAuth, useUser } from '@/entities';
+import { localStorageAuth, useAuth, useUser } from '@/entities';
 import { Form, TextField } from '@/shared';
 import { classNames } from '@/shared/lib';
 
@@ -16,7 +16,7 @@ import styles from './RegistrationForm.module.scss';
 
 export const RegistrationForm: FC = () => {
   const router = useRouter();
-  const { registerUserData } = useUser();
+  const { registerData } = useAuth();
   const {
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
@@ -35,7 +35,7 @@ export const RegistrationForm: FC = () => {
     mode: 'onChange',
   });
   const onSubmit = handleSubmit(async (dataToServer: FormValues) => {
-    const data = await registerUserData(dataToServer);
+    const data = await registerData(dataToServer);
     if (data && localStorageAuth.getToken()) {
       router.push('/');
     }
