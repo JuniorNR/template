@@ -1,4 +1,4 @@
-import type { User, UserDTO } from '@/entities/types';
+import type { User, UserDTO } from '@/entities';
 
 export interface ApiAuthRequest {
   user: User;

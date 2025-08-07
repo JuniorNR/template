@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import type { LoginRequest, RegisterRequest } from '@/entities/types';
-import { localStorageAuth } from '@/entities/user';
+import { localStorageAuth } from '@/entities';
+import type { LoginRequest, RegisterRequest } from '@/entities';
 
 import {
   useLoginMutation,

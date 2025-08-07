@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import { classNames } from '@/helpers';
 
 import { Loader } from '../../Loader';
-import { ButtonStatuses } from '../model/utils/Button.utils';
 
 import styles from './Button.module.scss';
 
@@ -21,10 +20,10 @@ export const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const preparedStylesByProps = {
-    [styles.error]: status === ButtonStatuses.ERROR,
-    [styles.success]: status === ButtonStatuses.SUCCESS,
-    [styles.info]: status === ButtonStatuses.INFO,
-    [styles.attention]: status === ButtonStatuses.ATTENTION,
+    [styles.error]: status === 'error',
+    [styles.success]: status === 'success',
+    [styles.info]: status === 'info',
+    [styles.attention]: status === 'attention',
     [styles.fullWidth]: fullWidth,
   };
   const renderIconEndOrLoading = () => {

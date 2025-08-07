@@ -4,8 +4,7 @@ import {
   useUpdatePublicFieldsMutation,
   useUpdatePrivateFieldsMutation,
   useUpdatePasswordMutation,
-} from '../api/user.api';
-import { localStorageAuth } from '../lib/localStorageAuth';
+} from '../api';
 
 import type { User, UserPasswordFields } from '../types';
 

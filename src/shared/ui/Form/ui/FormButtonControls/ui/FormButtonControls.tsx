@@ -72,14 +72,19 @@ export const FormButtonControls: FC<FormButtonControlsProps> = ({
     <div className={classNames(styles.formButtonControls)}>
       <div className={classNames(styles.formButtons)}>
         <Button
-          disabled={
-            !canHandleSubmit() || !isValid || additionalValidatingNotEmpty
-          }
+          status={statusForm}
           loading={loading}
           onClick={(event) => {
-            onSubmit(event);
-            changeStatusForm(errorFieldsText.length > 0 ? 'error' : 'success');
-
+            if (
+              canHandleSubmit() &&
+              isValid &&
+              additionalValidatingFields.length === 0
+            ) {
+              onSubmit(event);
+              changeStatusForm(
+                errorFieldsText.length > 0 ? 'error' : 'success',
+              );
+            }
             timerRef.current = setTimeout(() => {
               changeStatusForm('idle');
             }, holdStatusMS);
