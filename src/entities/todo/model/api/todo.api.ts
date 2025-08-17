@@ -10,6 +10,9 @@ import type {
   TodoDTO,
   TodosResponseServer,
   TodosResponseClient,
+  TodoRequest,
+  TodoResponseServer,
+  TodoResponseClient,
 } from '../types';
 
 export const todoApi = createApi({
@@ -29,7 +32,23 @@ export const todoApi = createApi({
       },
       providesTags: ['Todo'],
     }),
+    createTodo: builder.mutation<TodoResponseClient, Todo>({
+      query: (todoData) => ({
+        url: '/todos',
+        method: 'POST',
+        body: dto<Todo, TodoDTO>('toServer', todoData),
+      }),
+      transformResponse: (response: ApiResponse<TodoResponseServer>) => {
+        const todo = dto<TodoDTO, Todo>('toClient', response.data.todo);
+        const author = dto<UserDTO, User>('toClient', response.data.author);
+        return {
+          todo,
+          author,
+        };
+      },
+      invalidatesTags: ['Todo'],
+    }),
   }),
 });
 
-export const { useGetTodosQuery } = todoApi;
+export const { useGetTodosQuery, useCreateTodoMutation } = todoApi;

@@ -19,8 +19,8 @@ export const renderStatusIcons = ({
   disabled,
 }: {
   status: string;
-  editable: boolean;
-  disabled: boolean;
+  editable?: boolean;
+  disabled?: boolean;
 }) => {
   let statusIcon: React.ReactNode | null = null;
   const editableIcon = editable ? null : <EditOffIcon key='editable' />;

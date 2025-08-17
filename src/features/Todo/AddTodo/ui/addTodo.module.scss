@@ -1,0 +1,16 @@
+.addTodo {
+  display: flex;
+  gap: sizes.rem(10);
+
+  padding: sizes.rem(10);
+
+  & > div:first-child {
+    width: 75%;
+  }
+
+  & > div:last-child {
+    width: 25%;
+  }
+
+  @include mixins.scrollbar;
+}

@@ -18,8 +18,8 @@ export interface Todo {
   description: string;
   status: TodoStatuses;
   priority: TodoPriorities;
-  deadline: Date;
-  authorId: number;
+  deadline?: Date;
+  authorId?: number;
   createdAt: Date;
   updatedAt: Date;
   author: User;
@@ -38,6 +38,8 @@ export interface TodoDTO {
   author: UserDTO;
 }
 
+export type TodoRequest = Omit<Todo, 'id' | 'authorId'>;
+
 export interface TodosResponseServer {
   todos: TodoDTO[];
   author: UserDTO;
@@ -45,5 +47,15 @@ export interface TodosResponseServer {
 
 export interface TodosResponseClient {
   todos: Todo[];
+  author: User;
+}
+
+export interface TodoResponseServer {
+  todo: TodoDTO;
+  author: UserDTO;
+}
+
+export interface TodoResponseClient {
+  todo: Todo;
   author: User;
 }

@@ -1,3 +1,4 @@
+'use client';
 import type { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';

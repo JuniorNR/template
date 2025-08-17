@@ -1,6 +1,5 @@
 .profileLayout {
-  height: calc(100% - sizes.$breadCrumbsHeight);
-  padding: sizes.rem(10);
+  @include mixins.layout;
 }
 
 .profileLayoutContent {

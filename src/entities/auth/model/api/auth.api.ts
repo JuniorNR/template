@@ -1,16 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { baseQuery } from '@/api';
-import type {
-  LoginRequest,
-  RegisterRequest,
-  User,
-  UserDTO,
-} from '@/entities';
+import type { ApiResponse } from '@/config/types';
+import type { LoginRequest, RegisterRequest, User, UserDTO } from '@/entities';
 import { dto } from '@/shared/lib';
 
 import type { ApiAuthRequest, ApiAuthResponse } from '../types';
-import { ApiResponse } from '@/config/types';
 
 export const authApi = createApi({
   reducerPath: 'authApi',

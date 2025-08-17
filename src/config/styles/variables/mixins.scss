@@ -1,8 +1,8 @@
 @use './colors.scss' as colors;
+@use './sizes.scss' as sizes;
 
 @mixin scrollbar {
   overflow-x: auto;
-  scrollbar-gutter: stable;
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -15,4 +15,9 @@
   &::-webkit-scrollbar-thumb {
     background-color: colors.$borderColor;
   }
+}
+
+@mixin layout {
+  height: calc(100% - sizes.$breadCrumbsHeight);
+  padding: sizes.rem(10);
 }

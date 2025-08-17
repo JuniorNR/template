@@ -1,7 +1,9 @@
 import { type FC } from 'react';
 
+import { Todo } from '@/features';
+
 export const TodosPage: FC = () => {
-  return <div>TodosPage</div>;
+  return <Todo />;
 };
 
 export default TodosPage;

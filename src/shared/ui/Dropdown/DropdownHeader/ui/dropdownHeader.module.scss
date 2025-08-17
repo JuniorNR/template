@@ -1,0 +1,36 @@
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: sizes.rem(10);
+
+  cursor: pointer;
+
+  transition: transitions.$fast;
+
+  color: colors.$textColor3;
+
+  background-color: colors.$accentColor;
+
+  &:hover {
+    color: colors.$textColor2;
+    background-color: colors.$accentColor2;
+  }
+
+  & > .dropdownHeaderTitle {
+    user-select: none;
+  
+    font-size: sizes.rem(18);
+    font-weight: 600;
+  }
+
+  & > .dropdownHeaderArrow {
+    transition: transitions.$fast ease-in-out;
+    transform: rotate(0deg);
+
+    &.dropdownHeaderArrowOpen {
+      transform: rotate(-90deg);
+    }
+  }
+}

@@ -8,8 +8,6 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import type { NavigationMenuHorizontalProps } from '@/shared';
 
 import { AppRoutesProfile } from './appRouter.utils';
-import { ApiRoutes } from '../api';
-import { handleFetch } from '../helpers';
 
 export const ProfileLinkList: Omit<
   NavigationMenuHorizontalProps['items'],
@@ -26,12 +24,14 @@ export const ProfileLinkList: Omit<
     title: 'Settings',
     notifications: 0,
     url: AppRoutesProfile.SETTINGS,
+    disabled: true,
   },
   {
     icon: <NotificationImportantIcon />,
     title: 'Notifications',
     notifications: 0,
     url: AppRoutesProfile.NOTIFICATIONS,
+    disabled: true,
   },
   {
     icon: <ExitToAppIcon />,
